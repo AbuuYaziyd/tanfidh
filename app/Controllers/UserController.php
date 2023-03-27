@@ -19,21 +19,6 @@ class UserController extends BaseController
     public function index()
     {
         helper('form');
-        
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $hits = new Hits();
-        // Check for previous visits
-        $query = $hits->where('ip', $ip, 1, 0)->get();
-        $check = count($query->getResult());
-
-        // dd($check);
-        if ($check < 1) {
-            $data = [
-                'ip' => $ip,
-            ];
-            // Never visited - add
-            $hits->insert($data);
-        }
 
         $user = new User();
         $set = new Setting();

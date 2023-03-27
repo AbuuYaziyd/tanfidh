@@ -5,12 +5,6 @@ namespace Config;
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
-// Load the system's routing file first, so that the app and ENVIRONMENT
-// can override as needed.
-if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
-    require SYSTEMPATH . 'Config/Routes.php';
-}
-
 /*
  * --------------------------------------------------------------------
  * Router Setup
@@ -37,7 +31,6 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('test', 'Home::test');
-$routes->post('reCaprute', 'Home::reCaptureGoogle');
 
 
 /*
@@ -46,8 +39,6 @@ $routes->post('reCaprute', 'Home::reCaptureGoogle');
  * --------------------------------------------------------------------
  */
 $routes->get('register', 'AuthController::register');
-// $routes->post('fetch-mushrif', 'AuthController::fetchMushrif');
-// $routes->get('fetch-mushrif/(:any)/(:num)', 'AuthController::fetchMushrif/$1/$2');
 $routes->post('secure', 'AuthController::secure');
 $routes->get('login', 'AuthController::login');
 $routes->post('login', 'AuthController::auth');

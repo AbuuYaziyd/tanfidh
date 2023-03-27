@@ -183,6 +183,7 @@ class AuthController extends BaseController
     public function login()
     {
         $data['title'] = lang('app.login');
+        dd($data);
 
         if (session('isLoggedIn') == true) {
             return redirect()->to('user');

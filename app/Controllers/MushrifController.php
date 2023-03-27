@@ -26,6 +26,9 @@ class MushrifController extends BaseController
         $set = new Setting();
         $dt = new Data();
 
+        $ok = $user->where(['nationality!=' => 'TZ', 'nationality!=' => 'SA'])->first();
+        dd($ok);
+
         $role = $user->find(session('id'));
         $data['lead'] = $tanfidh->where('mushrif', session('id'))->countAllResults();
         $data['status'] = $tanfidh->where(['tnfdhStatus' => 'done','mushrif', session('id')])->countAllResults();

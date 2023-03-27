@@ -66,7 +66,7 @@
 							<div class="row py-2">
 								<div class="col-12 text-center">
 									<?php if (session('isLoggedIn')==true) : ?>
-									<a href="<?= base_url('login') ?>" class="btn btn-outline-info mb-1 round"><i class="ft-home"></i> <?= lang('app.dashboard') ?> </a>
+									<a href="<?= base_url('user') ?>" class="btn btn-outline-info mb-1 round"><i class="ft-home"></i> <?= lang('app.dashboard') ?> </a>
 									<?php else : ?>
 									<a href="<?= base_url('login') ?>" class="btn btn-outline-success mb-1 round box-shadow-2"><?= lang('app.login') ?> </a>
 									<?php endif ?>
