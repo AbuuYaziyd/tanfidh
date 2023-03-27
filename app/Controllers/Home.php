@@ -13,10 +13,10 @@ class Home extends BaseController
         return view('welcome', $data);
     }
 
-    // public function test()
-    // {
-    //     dd('test');
-    // }
+    public function test()
+    {
+        dd('test');
+    }
 
     public function reCaptureGoogle()
     {
