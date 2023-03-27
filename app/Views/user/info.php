@@ -71,11 +71,11 @@
                         <div class="col-2">
                             <i class="ft ft-cloud-drizzle info font-large-2" title="XRP"></i>
                         </div>
-                        <div class="col-5 pl-2">
+                        <div class="col-7 pl-2">
                             <h4><?= lang('app.tanfidh') . ' ' . lang('app.next') ?></h4>
                             <h6 class="text-muted"><?= lang('app.baarik') ?></h6>
                         </div>
-                        <div class="col-5 text-right">
+                        <div class="col-3 text-right">
                             <h4 class="danger"><?= lang('app.near') ?></h4>
                         </div>
                     </div>

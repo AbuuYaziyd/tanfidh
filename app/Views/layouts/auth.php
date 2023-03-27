@@ -13,7 +13,7 @@
     <title><?= APP_NAME . ' | ' . $title ?></title>
     <link rel="apple-touch-icon" href="<?= base_url('app-assets/images/ico/apple-icon-120.png') ?>">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('app-assets/images/ico/favicon.ico') ?>">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- BEGIN: Vendor CSS-->
@@ -37,7 +37,6 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('app-assets/css-rtl/core/menu/menu-types/horizontal-menu.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('app-assets/css-rtl/core/colors/palette-gradient.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('app-assets/css-rtl/pages/login-register.css') ?>">
-    <script src='https://www.google.com/recaptcha/api.js'></script>
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->

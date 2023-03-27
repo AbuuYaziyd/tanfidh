@@ -74,15 +74,15 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <h3 class="warning"><?= lang('app.tanfidh') ?> <?= lang('app.thisMonth') ?></h3>
+                                <h3 class="black"><?= lang('app.thisMonth') ?></h3>
                                 <h6><?= $status.'/'.$lead ?></h6>
                             </div>
                             <div>
-                                <i class="icon-docs warning font-large-2 float-right"></i>
+                                <i class="icon-docs black font-large-2 float-right"></i>
                             </div>
                         </div>
                         <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: <?= ($lead==0?0:$status/$lead) ?>%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-gradient-x-black" role="progressbar" style="width: <?= ($lead==0?0:$status/$lead) ?>%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>

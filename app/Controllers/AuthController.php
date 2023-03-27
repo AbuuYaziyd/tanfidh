@@ -16,7 +16,6 @@ class AuthController extends BaseController
     {
         helper('form');
         
-        $hits = new Hits();
         $nat = new Country();
         $user = new User();
         $bank = new Bank();
@@ -28,20 +27,6 @@ class AuthController extends BaseController
         } else {
             
             // return redirect()->to('login')->with('type', 'info')->with('text', lang('app.timelyClosed'))->with('title', lang('app.notification'));
-
-            $ip = $_SERVER['REMOTE_ADDR'];
-            // Check for previous visits
-            $query = $hits->where('ip', $ip, 1, 0)->get();
-            $check = count($query->getResult());
-
-            // dd($check);
-            if ($check < 1) {
-                $data = [
-                    'ip' => $ip,
-                ];
-                // Never visited - add
-                $hits->insert($data);
-            }
             
             $data['title'] = lang('app.signup');
             $data['nat'] = $nat->findAll();
@@ -197,20 +182,6 @@ class AuthController extends BaseController
 
     public function login()
     {
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $hits = new Hits();
-        // Check for previous visits
-        $query = $hits->where('ip', $ip, 1, 0)->get();
-        $check = count($query->getResult());
-
-        // dd($check);
-        if ($check < 1) {
-            $data = [
-                'ip' => $ip,
-            ];
-            // Never visited - add
-            $hits->insert($data);
-        }
         $data['title'] = lang('app.login');
 
         if (session('isLoggedIn') == true) {

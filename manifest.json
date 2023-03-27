@@ -1,0 +1,23 @@
+{
+  "short_name": "تنفيذ للعمرة",
+  "name": "تنفيذ للعمرة - طلاب تنزانيا",
+  "icons": [
+    {
+      "src": "./app-assets/images/logo/512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "./app-assets/images/logo/192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "./",
+  "scope": "." ,
+  "background_color": "#6a90c1",
+  "display": "standalone",
+  "theme_color": "#2c343b",
+  "description": "تنفيذ للعمرة - طلاب تنزانيا بالجامعة الإسلامية"
+}

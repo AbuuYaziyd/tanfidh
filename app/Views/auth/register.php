@@ -22,35 +22,23 @@
                             <?php $validation = \Config\Services::validation(); ?>
                             <?= form_open('secure') ?>
                             <label class="text-bold-600"><?= lang('app.nationality') ?></label>
-                            <?php if ($validation->getError('nationality')) : ?>
-                                <span class="badge badge-danger"> <?= $errors = $validation->getError('nationality') ?></span>
-                            <?php endif ?>
                             <fieldset class="form-group position-relative has-icon-left mb-1">
-                                <select class="select2 form-control" name="nationality" id="nat">
-                                    <option selected disabled><?= lang('app.choose') . ' ' . lang('app.nationality') ?></option>
+                                <input type="text" class="form-control" value="تنزانيا" readonly>
+                                <!-- <select class="select2 form-control" name="" id="nat">
                                     <?php foreach ($nat as $key => $data) : ?>
-                                        <option value="<?= $data['country_code'] ?>"><?= $data['country_arName'] ?></option>
+                                        <option value="<?= $data['country_code'] ?>" <?= $data['country_code']=='TZ'?'selected':'' ?> redonly><?= $data['country_arName'] ?></option>
                                     <?php endforeach ?>
-                                </select>
+                                </select> -->
                                 <div class="form-control-position">
                                     <i class="la la-flag"></i>
                                 </div>
                             </fieldset>
                             <label class="text-bold-600"><?= lang('app.jamia') ?></label>
-                            <?php if ($validation->getError('jamia')) : ?>
-                                <span class="badge badge-danger"> <?= $errors = $validation->getError('jamia') ?></span>
-                            <?php endif ?>
                             <fieldset class="form-group position-relative has-icon-left mb-1">
-                                <select class="select2 form-control" name="jamia" id="jamia">
-                                    <option selected disabled><?= lang('app.choose') . ' ' . lang('app.jamia') ?></option>
-                                    <?php foreach ($uni as $key => $data) : ?>
-                                        <option value="<?= $data['uni_id'] ?>"><?= $data['uni_name'] ?> - (<?= $data['uni_reg'] ?>)</option>
-                                    <?php endforeach ?>
-                                </select>
+                                <input type="text" class="form-control" value="الجامعة الإسلامية" readonly>
                                 <div class="form-control-position">
                                     <i class="la la-university"></i>
                                 </div>
-                                <!-- <span class="badge badge-danger" id="mushrif"> <?= lang('app.noMushrif') ?></span> -->
                             </fieldset>
                             <label class="text-bold-600"><?= lang('app.iqama').' '.$validation->getError('iqama') ?><?= $errors = $validation->getError('iqama') ?></label>
                             <fieldset class="form-group position-relative has-icon-left mb-1">
@@ -62,22 +50,12 @@
                                     <span class="badge badge-danger"> <?= $errors = $validation->getError('iqama') ?></span>
                                 <?php endif ?>
                             </fieldset>
-                            <label class="text-bold-600"><?= lang('app.namereg') . ' - (' . lang('app.arabic') ?>)</label>
+                            <label class="text-bold-600"><?= lang('app.namereg') . ' - (' . lang('app.arabic') .')' ?></label>
                             <?php if ($validation->getError('name')) : ?>
                                 <span class="badge badge-danger"> <?= $errors = $validation->getError('name') ?></span>
                             <?php endif ?>
                             <fieldset class="form-group position-relative has-icon-left mb-1">
                                 <input type="text" class="form-control" name="name" placeholder="<?= lang('app.name') . ' - (' . lang('app.arabic') ?>)" value="<?= old('name') ?>">
-                                <div class="form-control-position">
-                                    <i class="la la-user"></i>
-                                </div>
-                            </fieldset>
-                            <label class="text-bold-600"><?= lang('app.malaf') ?></label>
-                            <?php if ($validation->getError('malaf')) : ?>
-                                <span class="badge badge-danger"> <?= $errors = $validation->getError('malaf') ?></span>
-                            <?php endif ?>
-                            <fieldset class="form-group position-relative has-icon-left mb-1">
-                                <input type="text" class="form-control" name="malaf" placeholder="<?= lang('app.malaf') ?>" value="<?= old('malaf') ?>">
                                 <div class="form-control-position">
                                     <i class="la la-user"></i>
                                 </div>

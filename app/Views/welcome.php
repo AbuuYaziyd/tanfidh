@@ -11,7 +11,11 @@
         content="هدية الحاج والعمرة,  حاج ,حجاج, مناسكو مكة, مدينة, مسجد النبوي, مسجد الحرم">
     <meta name="author" content="abouyaziyd">
 	<title><?= APP_NAME . ' | ' . $title ?></title>
-	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" href="<?= base_url('app-assets/images/logo/logo.png') ?>">
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#2c343b">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('app-assets/images/ico/favicon.ico') ?>">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic&display=swap" rel="stylesheet">
 	<link rel="apple-touch-icon" href="<?= base_url('app-assets/images/ico/apple-icon-120.png') ?>">
 	<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('app-assets/images/ico/favicon.ico') ?>">
 
@@ -88,6 +92,7 @@
 	<script src="<?= base_url('app-assets/js/core/app-menu.js') ?>"></script>
 	<sript src="<?= base_url('app-assets/js/core/app.js') ?>"></script>
 	<!-- END: Theme JS-->
+    <script src="<?= base_url('assets/js/scripts.js') ?>"></script>
 
 </body>
 <!-- END: Body-->

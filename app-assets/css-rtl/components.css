@@ -763,13 +763,13 @@ footer .ft-heart:before {
 .navigation {
   font-size : 1.1rem;
   letter-spacing : 0.2px;
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Noto Kufi Arabic', sans-serif;
   font-weight : 400;
   overflow-y : hidden;
   padding-bottom : 20px;
 }
 .navigation .navigation-header {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Noto Kufi Arabic', sans-serif;
   font-weight : 400;
   line-height : 1.2;
   padding : 12px 22px;
@@ -4310,7 +4310,7 @@ iframe#preview {
 
 /* Quill Editor */
 .ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6, .ql-editor, .ql-toolbar {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Noto Kufi Arabic', sans-serif;
   font-size : 1rem;
 }
 
