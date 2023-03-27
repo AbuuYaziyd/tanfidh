@@ -1,6 +1,7 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
     <div class="row">
+    <?= $this->include('user/info') ?>
     <?= $this->include('admin/info') ?>
         <div class="col-md-3">
             <a href="<?= base_url('set') ?>">

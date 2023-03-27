@@ -183,7 +183,7 @@ class AuthController extends BaseController
     public function login()
     {
         $data['title'] = lang('app.login');
-        dd($data);
+        // dd($data);
 
         if (session('isLoggedIn') == true) {
             return redirect()->to('user');
@@ -195,20 +195,20 @@ class AuthController extends BaseController
 
     public function auth()
     {
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $hits = new Hits();
-        // Check for previous visits
-        $query = $hits->where('ip', $ip, 1, 0)->get();
-        $check = count($query->getResult());
+        // $ip = $_SERVER['REMOTE_ADDR'];
+        // $hits = new Hits();
+        // // Check for previous visits
+        // $query = $hits->where('ip', $ip, 1, 0)->get();
+        // $check = count($query->getResult());
 
-        // dd($check);
-        if ($check < 1) {
-            $data = [
-                'ip' => $ip,
-            ];
-            // Never visited - add
-            $hits->insert($data);
-        }
+        // // dd($check);
+        // if ($check < 1) {
+        //     $data = [
+        //         'ip' => $ip,
+        //     ];
+        //     // Never visited - add
+        //     $hits->insert($data);
+        // }
         $session = session();
         $user = new User();
 
