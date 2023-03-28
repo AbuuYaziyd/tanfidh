@@ -61,13 +61,11 @@ class AuthController extends BaseController
                 'name' => 'required|min_length[3]|max_length[50]',
                 'iban' => 'required|exact_length[24]|is_unique[users.iban]',
                 'iqama' => 'required|exact_length[10]|integer|is_unique[users.iqama]',
-                'malaf' => 'required|exact_length[4]|integer|is_unique[users.malaf]',
                 'bitaqa' => 'required',
                 'phone' => 'required|exact_length[9]|integer',
                 'nationality' => 'required',
                 'jamia' => 'required|integer',
                 'bank' => 'required|integer',
-                'check' => 'required',
                 'level' => 'required',
             ],
             [   // Errors
@@ -78,12 +76,6 @@ class AuthController extends BaseController
                     'max_length' => lang('error.max_length'),
                 ],
                 'iqama' => [
-                    'required' => lang('error.required'),
-                    'integer' => lang('error.integer'),
-                    'exact_length' => lang('error.exact_length'),
-                    'is_unique' => lang('error.is_unique'),
-                ],
-                'malaf' => [
                     'required' => lang('error.required'),
                     'integer' => lang('error.integer'),
                     'exact_length' => lang('error.exact_length'),
@@ -100,9 +92,6 @@ class AuthController extends BaseController
                     'required' => lang('error.required'),
                     'integer' => lang('error.integer'),
                     'exact_length' => lang('error.exact_length'),
-                ],
-                'check' => [
-                    'required' => lang('error.required'),
                 ],
                 'bank' => [
                     'required' => lang('error.required'),
@@ -121,23 +110,13 @@ class AuthController extends BaseController
             ]
         );
         
-        $cnt = $set->where('name', 'count')->first()['value'];
-        $ok = $user->select('malaf')->orderBy('id', 'desc')->findAll();
-        
-        foreach ($ok as $data) {
-            $arr1[] = $data['malaf'];
-        }
-        for ($i=100; $i < intval($cnt); $i++) { 
-            if (!(in_array($i, $arr1))) {
-                    $malaf = $i;
-            }
-        }
-        
         if (!$input) {
 
             $data['nat'] = $nat->findAll();
             $data['bank'] = $bank->findAll();
             $data['uni'] = $uni->findAll();
+            $data['validation'] = $this->validator->getErrors();
+
             $set = $set->where('name', 'count')->first();
             if ($user->countAllResults() >= intval($set['value'])) {
                 $data['reg'] = 1;
@@ -145,37 +124,27 @@ class AuthController extends BaseController
                 $data['reg'] = null;
             }
             $data['title'] = lang('app.register');
-            return redirect()->back()->withInput()->with('validation', $this->validator->getErrors())->with('data', $data);
+
+            return redirect()->back()->withInput()->with('data', $data);
         } else {
+            $data = [
+                'name' => $this->request->getVar('name'),
+                'password' => password_hash(intval($this->request->getVar('iqama')), PASSWORD_DEFAULT),
+                'iban' => strtoupper($this->request->getVar('iban')),
+                'iqama' => $this->request->getVar('iqama'),
+                'bitaqa' => $this->request->getVar('bitaqa'),
+                'phone' => $this->request->getVar('phone'),
+                'nationality' => $this->request->getVar('nationality'),
+                'jamia' => $this->request->getVar('jamia'),
+                'level' => $this->request->getVar('level'),
+                'bank' => $this->request->getVar('bank'),
+            ];
+            // dd($data); 
 
-            $mushrif = $user->where(['nationality' => $this->request->getVar('nationality'), 'jamia' => $this->request->getVar('jamia'), 'role' => 'mushrif'])->first()['id']??null;
-            // dd($mushrif);
-
-            if (!$mushrif) {
-                dd('notFound');
-            } else {
-                $data = [
-                    'name' => $this->request->getVar('name'),
-                    'password' => password_hash(intval($this->request->getVar('iqama')), PASSWORD_DEFAULT),
-                    'iban' => strtoupper($this->request->getVar('iban')),
-                    'iqama' => $this->request->getVar('iqama'),
-                    'malaf' => $this->request->getVar('malaf'),
-                    'bitaqa' => $this->request->getVar('bitaqa'),
-                    'phone' => $this->request->getVar('phone'),
-                    'nationality' => $this->request->getVar('nationality'),
-                    'jamia' => $this->request->getVar('jamia'),
-                    'level' => $this->request->getVar('level'),
-                    'mushrif' => $mushrif??null,
-                    'malaf' => $malaf,
-                    'bank' => $this->request->getVar('bank'),
-                ];
-                // dd($data); 
-
-                $ok = $user->save($data);
-                
-                if ($ok) {
-                    return redirect()->to('login')->with('type', 'success')->with('text', lang('app.useIqamaAsPassword'))->with('title', lang('app.registerSuccess'));
-                }
+            $ok = $user->save($data);
+            
+            if ($ok) {
+                return redirect()->to('login')->with('type', 'success')->with('text', lang('app.useIqamaAsPassword'))->with('title', lang('app.registerSuccess'));
             }
         }
     }

@@ -19,10 +19,11 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
+                            <?php $validation = \Config\Services::validation(); ?>
                             <?= form_open('login') ?>
                                 <label class="text-bold-600"><?= lang('app.iqama') ?></label>
-                                <?php if ((session()->getFlashdata('iqama'))) : ?>
-                                    <span class="badge badge-danger"><?= (session()->getFlashdata('iqama')) ?></span>
+                                <?php if (($validation->getError('iqama'))) : ?>
+                                    <span class="badge badge-danger"><?= ($validation->getError('iqama')) ?></span>
                                 <?php endif ?>
                                 <fieldset class="form-group position-relative has-icon-left mb-1">
                                     <input type="text" class="form-control" name="iqama" placeholder="<?= lang('app.iqama') ?>">
@@ -31,8 +32,8 @@
                                     </div>
                                 </fieldset>
                                 <label class="text-bold-600"><?= lang('app.password') ?></label>
-                                <?php if ((session()->getFlashdata('password'))) : ?>
-                                    <span class="badge badge-danger"><?= (session()->getFlashdata('password')) ?></span>
+                                <?php if (($validation->getError('password'))) : ?>
+                                    <span class="badge badge-danger"><?= ($validation->getError('password')) ?></span>
                                 <?php endif ?>
                                 <fieldset class="form-group position-relative has-icon-left">
                                     <input type="password" class="form-control" name="password" placeholder="<?= lang('app.password') ?>">
