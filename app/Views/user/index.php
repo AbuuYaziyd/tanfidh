@@ -47,7 +47,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <a href="https://abuuyaziyd.github.io/test/student/index.html" target="_blank">
                 <div class="card pull-up">
                     <div class="card-content">
@@ -69,6 +69,6 @@
                     </div>
                 </div>
             </a>
-        </div>
+        </div> -->
     </div>
 <?= $this->endSection() ?>
