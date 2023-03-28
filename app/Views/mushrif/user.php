@@ -16,7 +16,7 @@
                                 <a href="tel:+966<?= $user['phone'] ?>" class="btn btn-sm round btn-secondary"><i class="la la-mobile"></i> تواصل</a><a href="https://wa.me/966<?= $user['phone'] ?>" target="_blank" class="btn btn-success btn-sm round"> واتساب <i class="la la-whatsapp"></i></a>
                         </div>
                     </div>
-                    <a href="<?= base_url('admin/delete/' . $user['id']) ?>" id="delete" class="btn round btn-danger btn-block p-1 mb-1 disabled"> <i class="la la-trash"></i> <?= lang('app.delete') ?></a>
+                    <a href="<?= base_url('admin/delete/' . $user['id']) ?>" id="delete" class="btn round btn-danger btn-block p-1 mb-1"> <i class="la la-trash"></i> <?= lang('app.delete') ?></a>
                 </div>
             </div>
             
