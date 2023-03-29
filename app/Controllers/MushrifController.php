@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\Bank;
 use App\Models\Country;
 use App\Models\Data;
 use App\Models\Image;
@@ -75,6 +76,85 @@ class MushrifController extends BaseController
         } else {
             return redirect()->to('user')->with('type', 'error')->with('text', lang('app.authorisedPersonellOnly'))->with('title', lang('app.sorry'));
         }   
+    }
+
+    public function add()
+    {
+        helper('form');
+
+        $nat = new Country();
+        $user = new User();
+        $bank = new Bank();
+        $uni = new University();
+        
+        $data['title'] = lang('app.registerNow');
+        $data['nat'] = $nat->findAll();
+        $data['bank'] = $bank->findAll();
+        $data['uni'] = $uni->findAll();
+
+        return view('user/add', $data);
+    }
+
+    public function create()
+    
+    {
+        // dd($this->request->getVar());
+
+        helper('form');
+        
+        $nat = new Country();
+        $bank = new Bank();
+        $uni = new University();
+        $user = new User();
+
+        $rules =  [
+            'iqama' => [
+                    'rules'  => 'required|integer|is_unique[users.iqama]',
+                    'errors' => [
+                        'required' => lang('error.required'),
+                        'integer' => lang('error.integer'),
+                        'exact_length' => lang('error.exact_length'),
+                        'is_unique' => lang('error.is_unique'),
+                    ]
+                ],
+            'bitaqa' => [
+                    'rules'  => 'required|integer|is_unique[users.bitaqa]',
+                    'errors' => [
+                        'required' => lang('error.required'),
+                        'integer' => lang('error.integer'),
+                        'exact_length' => lang('error.exact_length'),
+                        'is_unique' => lang('error.is_unique'),
+                    ],
+            ],
+        ];
+
+        $input = $this->validate($rules);
+        
+        if (!$input) {
+
+            $data['nat'] = $nat->findAll();
+            $data['bank'] = $bank->findAll();
+            $data['uni'] = $uni->findAll();
+            // $data['validation'] = $this->validator;
+
+            $data['title'] = lang('app.registerNow');
+            // dd($data);
+
+            return redirect()->back()->withInput()->with('data', $data);
+        } else {
+            $data = [
+                'password' => password_hash(intval($this->request->getVar('iqama')), PASSWORD_DEFAULT),
+                'iqama' => $this->request->getVar('iqama'),
+                'bitaqa' => $this->request->getVar('bitaqa'),
+            ];
+            dd($data); 
+
+            $ok = $user->save($data);
+            
+            if ($ok) {
+                return redirect()->to('login')->with('type', 'success')->with('text', lang('app.useIqamaAsPassword'))->with('title', lang('app.registerSuccess'));
+            }
+        }
     }
     
     public function judud()

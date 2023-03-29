@@ -124,6 +124,8 @@ $routes->group('admin', function ($routes) {
 $routes->group('mushrif', function ($routes) {
     $routes->get('/', 'MushrifController::index', ['filter' => 'mushrif']);
     $routes->get('users', 'MushrifController::users', ['filter' => 'mushrif']);
+    $routes->get('add', 'MushrifController::add', ['filter' => 'mushrif']);
+    $routes->post('create', 'MushrifController::create', ['filter' => 'mushrif']);
     $routes->get('judud', 'MushrifController::judud', ['filter' => 'mushrif']);
     $routes->get('user/(:num)', 'MushrifController::user/$1', ['filter' => 'mushrif']);
     $routes->get('activate/(:num)', 'MushrifController::activate/$1', ['filter' => 'mushrif']);

@@ -21,12 +21,12 @@
                         <div class="card-body">
                             <?php $validation = \Config\Services::validation(); ?>
                             <?= form_open('login') ?>
-                                <label class="text-bold-600"><?= lang('app.iqama') ?></label>
-                                <?php if (($validation->getError('iqama'))) : ?>
-                                    <span class="badge badge-danger"><?= ($validation->getError('iqama')) ?></span>
+                                <label class="text-bold-600"><?= lang('app.bitaqa') ?></label>
+                                <?php if (($validation->getError('bitaqa'))) : ?>
+                                    <span class="badge badge-danger"><?= ($validation->getError('bitaqa')) ?></span>
                                 <?php endif ?>
                                 <fieldset class="form-group position-relative has-icon-left mb-1">
-                                    <input type="text" class="form-control" name="iqama" placeholder="<?= lang('app.iqama') ?>">
+                                    <input type="text" class="form-control" name="bitaqa" placeholder="<?= lang('app.bitaqa') ?>">
                                     <div class="form-control-position">
                                         <i class="la la-user"></i>
                                     </div>
@@ -47,7 +47,6 @@
                     </div>
                     <div class="card-footer">
                         <p class="float-xl-left text-center m-0"><a href="<?= base_url('recover') ?>" class="card-link"><?= lang('app.recoverpassword') ?></a></p>
-                       <p class="float-xl-right text-center m-0"><?= lang('app.newUser') ?> <a href="<?= base_url('register') ?>" class="card-link"><?= lang('app.signup') ?></a></p>
                     </div>
                 </div>
             </div>

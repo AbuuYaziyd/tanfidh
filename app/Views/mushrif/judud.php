@@ -10,6 +10,7 @@
                             <div class="card-header">
                                 <h2>
                                     <?= $title ?>
+                                    <a href="<?= base_url('mushrif/add') ?>" class="btn btn-outline-success round pull-left"><?= lang('app.add') ?></a>
                                 </h2>
                             </div>
                             <div class="card-content collapse show">

@@ -168,9 +168,9 @@ class AuthController extends BaseController
         $user = new User();
 
         // dd($this->request->getVar());
-        $iqama = $this->request->getVar('iqama');
+        $bitaqa = $this->request->getVar('bitaqa');
         $password = $this->request->getVar('password');
-        $data = $user->where('iqama =', $iqama)->first();
+        $data = $user->where('bitaqa =', $bitaqa)->first();
 
         // dd($data);
         if ($data) {
@@ -182,7 +182,7 @@ class AuthController extends BaseController
                 $sessData = [
                     'id' => $data['id'],
                     'name' => $data['name'],
-                    'malaf' =>sprintf('%04s', ($data['malaf']!=1111?$data['malaf']:'----')),
+                    'malaf' =>sprintf('%04s', ($data['malaf'])),
                     'bitaqa' => $data['bitaqa'],
                     'role' => $data['role'],
                     'mushrif' => $data['mushrif'],
