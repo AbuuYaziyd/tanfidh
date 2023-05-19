@@ -58,6 +58,13 @@
 				<div class="row full-height-vh-with-nav">
 					<div class="col-12 d-flex align-items-center justify-content-center">
 						<div class="col-lg-6 col-10">
+                        <div class="card-title text-center">
+                            <div class="p-1">
+                                <a href="<?= base_url() ?>">
+                                    <img src="<?= base_url('app-assets/images/logo/logo.png') ?>" alt="logo" height="300px">
+                                </a>
+                            </div>
+                        </div>
 							<div class="row">
 								<div class="col-12 text-center">
 									<h3 class="error-code text-center mb-2"><?= lang('app.welcome') ?></h3>
