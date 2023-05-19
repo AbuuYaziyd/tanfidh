@@ -227,17 +227,19 @@ class MashruuController extends BaseController
         } 
     }
 
-    public function download()
+    public function download($dt)
     {
         $set = new Setting();
         $user = new User();
          
-        $date = date('d-m-Y', strtotime($set->where('info', 'tasrihDate')->first()['extra']));
+        $date = $dt. date(' d-m-Y', strtotime($set->where('info', 'tasrihDate')->first()['extra']));
+        // dd($date);
         $source = 'app-assets/images/tasrih';
         $destination = FCPATH.$date;
         $user->zip_creation($source, $destination);
 
         return $this->response->download(FCPATH . $date.'.zip', null);
+        // dont forget to delete the file!
     }
 
     public function done()

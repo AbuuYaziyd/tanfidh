@@ -6,7 +6,7 @@
         <div class="card-content">
             <div class="row p-1 m-1">
                 <div class="col">
-                    <a href="<?= base_url('tanfidh/download') ?>" class="btn btn-lg btn-block btn-primary"><?= lang('app.download') ?> <?= lang('app.tasrihs') ?></a>
+                    <a href="<?= base_url('tanfidh/download/'.date('his')) ?>" class="btn btn-lg btn-block btn-primary"><?= lang('app.download') ?> <?= lang('app.tasrihs') ?></a>
                 </div>
             </div>
         </div>

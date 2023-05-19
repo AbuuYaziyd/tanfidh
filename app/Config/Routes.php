@@ -83,7 +83,7 @@ $routes->group('tanfidh', function ($routes) {
     $routes->get('connect', 'MashruuController::connect', ['filter' => 'auth']);
     $routes->get('delete', 'MashruuController::delete', ['filter' => 'auth']);
     $routes->get('tasrih', 'MashruuController::tasrih', ['filter' => 'auth']);
-    $routes->get('download', 'MashruuController::download', ['filter' => 'auth']);
+    $routes->get('download/(:any)', 'MashruuController::download/$1', ['filter' => 'auth']);
     $routes->get('tasrih/delete', 'MashruuController::tasrihDelete', ['filter' => 'auth']);
     $routes->get('done', 'MashruuController::done', ['filter' => 'auth']);
     $routes->get('start', 'MashruuController::start', ['filter' => 'auth']);
