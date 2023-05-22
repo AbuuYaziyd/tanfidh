@@ -171,12 +171,12 @@
                                     <div class="col-2">
                                         <i class="ft ft-cloud-drizzle success font-large-2" title="XRP"></i>
                                     </div>
-                                    <div class="col-5 pl-2">
+                                    <div class="col-7">
                                         <h4><?= lang('app.tanfidh') . ' ' . lang('app.next') ?></h4>
                                         <h6 class="text-muted"><?= lang('app.baarik') ?></h6>
                                     </div>
-                                    <div class="col-5 text-right">
-                                        <h4 class="warning blink"><b><?= lang('app.doorOpen') ?> <?= lang('app.registerNow') ?></b></h4>
+                                    <div class="col-3 text-right">
+                                        <h4 class="success blink"><b><?= lang('app.register') ?></b></h4>
                                     </div>
                                 </div>
                             </div>

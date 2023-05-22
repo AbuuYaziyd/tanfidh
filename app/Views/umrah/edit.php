@@ -13,8 +13,8 @@
                     <div class="card-content">
                         <div class="card-body">
                             <h4 class="card-title"><?= lang('app.register') . ' ' . lang('app.to') . ' ' . lang('app.tanfidh') . '  ' . lang('app.umrah') ?><span class="text-muted font-medium-1"> @</span><span class="users-view-username text-muted font-medium-1 "><?= sprintf('%04s',session('malaf')) ?></span></h4>
-                            <p><code style="font-family: Cairo;"><?= lang('app.imgErr') ?></code></p>
-                            <div class="row">
+                            <span class="bagde badge-danger badge-pill mb-2"><?= lang('app.imgErr') ?></span>
+                            <div class="row mt-1">
                                 <div class="col-12 mb-1">
                                     <img class="img-fluid mb-2" id="show_image" src="<?= base_url($umrah['tasrih']?? 'app-assets/images/demo/no-image.png') ?>" alt="img">
                                     <fieldset class="form-group">
@@ -22,7 +22,7 @@
                                             <div class="input-group-prepend">
                                                 <label class="input-group-text"><?= lang('app.donefor') ?></label>
                                             </div>
-                                            <input type="text" class="form-control" value="<?= date('d/m/Y', strtotime($umrah['tnfdhDate'])) ?>" readonly>
+                                            <input type="date" class="form-control" value="<?= date('Y-m-d', strtotime($umrah['tnfdhDate'])) ?>" readonly>
                                         </div>
                                         <?php if ($validation->getError('select')) : ?>
                                             <span class="badge badge-danger"> <?= $errors = $validation->getError('select') ?></span>

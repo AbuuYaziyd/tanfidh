@@ -146,7 +146,7 @@ return [
     'chooseFile' => 'اختار الملف',
     'chooseFileIfyouhavedownlad' => 'اختار الملف إن كان جاهزا',
     'choose' => 'اختيار',
-    'imgErr' => 'يلزم الصورة أي تكون <b>JPG/PNG</b> و أن لا تزيد <b>- 2MB</b> استخدم لقطة للشاشة',
+    'imgErr' => 'يلزم الصورة أن تكون <b>JPG/PNG</b> و أن لا تزيد <b>- 2MB</b>',
     'allRightsReserved' => 'جميع الحقوق محفوظة',
     'success' => 'بنجاح',
 

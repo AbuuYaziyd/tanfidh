@@ -9,21 +9,22 @@ use App\Models\Data;
 use App\Models\Mashruu;
 use App\Models\Notify;
 use App\Models\Setting;
-use App\Models\Umrah;
+use App\Models\Tanfidh;
 use App\Models\University;
 use App\Models\User;
 
-class UmrahController extends BaseController
+class TanfidhController extends BaseController
+
 {
     public function index()
     {
         helper('form');
 
-        $umrah = new Umrah();
+        $umrah = new Tanfidh();
         $set = new Setting();
 
         $data['title'] = lang('app.tanfidh');
-        $data['next'] = $set->where('name', 'tanfidhDate')->findAll();
+        $data['next'] = $set->where(['name'=>'tanfidhDate','value>='=>date('Y-m-d')])->orderBy('value','asc')->findAll();
         $data['umrah'] = $umrah->where(['userId' => session('id')])->orderBy('tnfdhId', 'DESC')->first();
         $data['green'] = $umrah->where(['userId' => session('id'), 'tnfdhStatus' => 'completed'])->first();
         // dd($data);
@@ -34,13 +35,13 @@ class UmrahController extends BaseController
     public function create()
     {
         // dd($this->request->getVar());
-        $umrah = new Umrah();
-        $user = new User();
+        $umrah = new Tanfidh();
+        $usr = new User();
 
         $id = $this->request->getVar('id');
         $tanfidh = $this->request->getVar('tanfidh');
-        $usr = $user->find(session('id'));
-        $mushrif = $user->where(['nationality' => ($usr['nationality']), 'jamia' => ($usr['jamia']), 'role' => 'mushrif'])->first()['id'];
+        $user = $usr->find(session('id'));
+        // dd($user);
 
         $data['title'] = lang('app.umrah');
         $check = $umrah->where(['userId' => $id, 'tnfdhDate' => $tanfidh])->countAllResults();
@@ -48,10 +49,10 @@ class UmrahController extends BaseController
 
         if ($check <= 0) {
             $reg = [
-                'userId' => session('id'),
+                'userId' => $id,
                 'malaf' => session('malaf'),
-                'tnfdhDate' => $tanfidh,
-                'mushrif' => $mushrif,
+                // 'tnfdhDate' => $tanfidh,
+                'mushrif' => $usr->where('role', 'admin')->first()['name'],
             ];
             // dd($reg);
             
@@ -59,7 +60,7 @@ class UmrahController extends BaseController
 
             return redirect()->to('umrah')->with('type', 'success')->with('text', lang('app.regOk'))->with('title', lang('app.done'));
         }else {
-            return redirect()->to(previous_url());
+            return redirect()->back()->with('type', 'error')->with('title', lang('app.sorry'))->with('text', lang('app.errorOccured'));
         }
     }
 
@@ -67,7 +68,7 @@ class UmrahController extends BaseController
     {
         helper('form');
 
-        $umrah = new Umrah();
+        $umrah = new Tanfidh();
         $user = new User();
 
         $ok = $umrah->find($id);
@@ -91,21 +92,23 @@ class UmrahController extends BaseController
 
     public function update($id)
     {
-        $umrah = new Umrah();
+        $this->request->getFile('img');
+        
+        $umrah = new Tanfidh();
         $usr = new User();
         $nat = new Country();
         $jam = new University();
         $notfy = new Notify();
 
         $user = $umrah->find($id);
-        $us = $usr->find($user['mushrif']);
-        $nt = $nat->where('country_code', $us['nationality'])->first()['country_arName'];
+        // $us = $usr->find(session('id'));
+        // $nt = $nat->where('country_code', $us['nationality'])->first()['country_arName'];
         $notf = $notfy->where(['userId' => $user['userId'], 'title' => 'tasrih'])->findAll();
-        $jm = $jam->where('uni_id', $us['jamia'])->first()['uni_name'];
-        $mushrif = $nt.' - '. $jm;
-        $upl = 'tasrih';
-        $next = $user['tnfdhDate'];
-        // dd($user['tnfdhId']);
+        // $jm = $jam->where('uni_id', $us['jamia'])->first()['uni_name'];
+        // $mushrif = $nt.' - '. $jm;
+        // $upl = 'tasrih';
+        // $next = $user['tnfdhDate'];
+        // dd($user);
 
         $validationRule = $this->validate(
             [
@@ -125,7 +128,7 @@ class UmrahController extends BaseController
 
             helper('form');
             $data['title'] = lang('app.data');
-            // dd($data['errors']['img']);
+            dd($data['errors']['img']);
             return redirect()->to('umrah/show/'.$id)->with('type', 'error')->with('title', lang(
             'app.errorOccured'))->with('text', $data['errors']['img']);
         }
@@ -133,7 +136,7 @@ class UmrahController extends BaseController
         // dd(file_exists($user['tasrih']));
         if (file_exists($user['tasrih'])) {
 
-            // dd($user['tasrih']);
+            dd($user['tasrih']);
             unlink($user['tasrih']);
 
             $img = $this->request->getFile('img');
@@ -145,17 +148,17 @@ class UmrahController extends BaseController
                 'tasrih' => $loc,
                 'mulahadha' => null,
             ];
-            // dd($ppn);
+            dd($ppn);
 
-            $img->move('app-assets/images/tasrih/', $name);
-            $umrah->update($id, $ppn);
-
-            // dd($notf);
+            dd($notf);
             if ($notf != null) {
                 foreach ($notf as $value) {
                     $notfy->delete($value['id']);
                 }
             }
+
+            $img->move('app-assets/images/tasrih/', $name);
+            $umrah->update($id, $ppn);
 
             return redirect()->to('umrah')->with('type', 'success')->with('text', lang('app.imageUploaded'))->with('title', lang('app.success'));
         } else {
@@ -188,7 +191,7 @@ class UmrahController extends BaseController
     {
         helper('form');
 
-        $umrah = new Umrah();
+        $umrah = new Tanfidh();
 
         $data['umrah'] = $umrah->find($id);
         $data['title'] = lang('app.'.$this->request->getVar('locType'));
@@ -200,7 +203,7 @@ class UmrahController extends BaseController
     public function miqat($id)
     {
         // dd($this->request->getVar());
-        $umrah = new Umrah();
+        $umrah = new Tanfidh();
         $mash =  new Mashruu();
 
         $umr = $umrah->find($id);
@@ -228,7 +231,7 @@ class UmrahController extends BaseController
     public function makkah($id)
     {
         // dd($this->request->getVar());
-        $umrah = new Umrah();
+        $umrah = new Tanfidh();
         $mash = new Mashruu();
         $usr = new User();
         $jamia = new University();

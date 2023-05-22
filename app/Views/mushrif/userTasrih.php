@@ -5,16 +5,6 @@
         <div class="content-body">
             <section id="configuration">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header" style="text-align: center;">
-                                    <h3><b><i class="flag-icon flag-icon-<?= strtolower($user['nationality']) ?>"></i> -  <?= $loc ?></b></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <?php if ($user['imgIqama'] != null) : ?>
                         <div class="col-md-4">
                             <div class="card">

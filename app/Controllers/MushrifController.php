@@ -250,7 +250,7 @@ class MushrifController extends BaseController
 
     public function tasrih()
     {
-        $tanfidh = new Umrah();
+        $tanfidh = new Tanfidh();
         $user = new User();
 
         $mr = $user
@@ -280,31 +280,21 @@ class MushrifController extends BaseController
         // dd($id);
         helper('form');
 
-        $tanfidh = new Umrah();
+        $tanfidh = new Tanfidh();
         $user = new User();
 
-        $mr = $user
-                ->join('countries c', 'c.country_code=users.nationality')
-                ->join('universities u', 'u.uni_id=users.jamia')
-                ->find(session('id'));
-        $mushrif = $mr['id'];
-        $data['user'] = $tanfidh->where(['tanfidh.mushrif' => $mushrif, 'tnfdhStatus' => null, 'tanfidh.userId' => $id])
+        $data['user'] = $tanfidh->where(['tnfdhStatus' => null, 'tanfidh.userId' => $id])
                             ->join('users u', 'u.id=tanfidh.userId')
                             ->join('images', 'u.id=images.userId')
                             ->first();
         $data['title'] = lang('app.tasrih');
-        $data['loc'] = $mr['country_arName'].' - '.$mr['uni_name'];
         // dd($data);
         
-        if (session('role') == 'mushrif') {
             if (!$data['user']) {
                 return redirect()->to('user');
             } else {
                 return view('mushrif/userTasrih', $data);
-            }
-        } else {
-            return redirect()->to('user')->with('type', 'error')->with('text', lang('app.authorisedPersonellOnly'))->with('title', lang('app.sorry'));
-        }   
+            } 
     }
 
     public function mulahadha($id)
@@ -351,7 +341,7 @@ class MushrifController extends BaseController
 
     public function sendTasrih($id)
     {
-        $tanfidh = new Umrah();
+        $tanfidh = new Tanfidh();
 
         $data = [
             'tnfdhStatus' => 0,
@@ -366,7 +356,7 @@ class MushrifController extends BaseController
 
     public function tasrihDelete($id)
     {
-        $tanfidh = new Umrah();
+        $tanfidh = new Tanfidh();
         $usr = new User();
         $nat = new Country();
         $jam = new University();
@@ -424,7 +414,7 @@ class MushrifController extends BaseController
         $dt = new Data();
         $nat = new Country();
         $uni = new University();
-        $umra = new Umrah();
+        $umra = new Tanfidh();
 
         $user = $usr->find(session('id'));
         $cntry_code = $user['nationality'];

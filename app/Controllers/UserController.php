@@ -9,7 +9,7 @@ use App\Models\Data;
 use App\Models\Hits;
 use App\Models\Image;
 use App\Models\Setting;
-use App\Models\Umrah;
+use App\Models\Tanfidh;
 use App\Models\University;
 use App\Models\User;
 use App\Models\Whatsapp;
@@ -24,7 +24,7 @@ class UserController extends BaseController
         $set = new Setting();
         $dt = new Data();
         $img = new Image();
-        $umrah = new Umrah();
+        $umrah = new Tanfidh();
 
         $data['user'] = $user->where('status', 'active')->countAllResults();
         $data['mandub'] = $user->where('role', 'mandub')->countAllResults();

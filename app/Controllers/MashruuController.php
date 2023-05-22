@@ -7,7 +7,6 @@ use App\Models\Mashruu;
 use App\Models\Notify;
 use App\Models\Setting;
 use App\Models\Tanfidh;
-use App\Models\Umrah;
 use App\Models\User;
 
 class MashruuController extends BaseController
@@ -17,7 +16,7 @@ class MashruuController extends BaseController
         helper('form');
 
         $tan = new Mashruu();
-        $umr = new Umrah();
+        $umr = new Tanfidh();
 
         $data['title'] = lang('app.tanfidh');
         $data['all'] = $tan
@@ -111,7 +110,7 @@ class MashruuController extends BaseController
 
     public function connect()
     {
-        $umr = new Umrah();
+        $umr = new Tanfidh();
         $mash = new Mashruu();
 
         $tanfidh = $umr->where('tnfdhStatus', '0')->join('users u', 'u.id=tanfidh.userId')->findAll();
@@ -155,7 +154,7 @@ class MashruuController extends BaseController
         helper('filesystem');
 
         $mash = new Mashruu();
-        $tan = new Umrah();
+        $tan = new Tanfidh();
         $notify = new Notify();
         $set = new Setting();
 
@@ -190,41 +189,57 @@ class MashruuController extends BaseController
 
     public function tasrih()
     {
-        $tanfidh = new Umrah();
+    //     $tanfidh = new Tanfidh();
+    //     $user = new User();
+
+    //     $umrah = $tanfidh->where(['tnfdhStatus' => null])
+    //                     ->join('users us', 'us.id=tanfidh.userid')
+    //                     ->findAll();
+    //                     // dd($umrah);
+    //     // $umrah = $tanfidh->where(['tnfdhStatus' => 1])->findAll();
+    //     if (count($umrah) > 0) {
+    //         foreach ($umrah as $dt) {
+    //             $ok[] = [
+    //                 'tanfidh' => $tanfidh->find($dt['tnfdhId']),
+    //                 'user' => $user->join('countries c', 'c.country_code=users.nationality')
+    //                         ->join('universities u', 'u.uni_id=users.jamia')
+    //                         ->join('banks', 'banks.bankId=users.bank')
+    //                         ->find($dt['userId']),
+    //             ];
+    //         }
+    //     } else {
+    //         $ok = [];
+    //     }
+
+    //     $data['title'] = lang('app.tasrihs');
+    //     $data['umrah'] = $ok;
+    //     $data['tasrih'] = $tanfidh->join('users s', 's.id=tanfidh.userId')
+    //                         ->join('countries c', 'c.country_code=s.nationality')
+    //                         ->join('universities u', 'u.uni_id=s.jamia')
+    //                         ->where(['tnfdhStatus'=>null, 'tasrih!='=>null])
+    //                         ->findAll();
+    //     // dd($data);
+
+    //     return view('mashruu/tasrih', $data);
+        $tanfidh = new Tanfidh();
         $user = new User();
 
-        $umrah = $tanfidh->where(['tnfdhStatus' => 1])
-                        ->join('users us', 'us.id=tanfidh.userid')
-                        ->findAll();
-        $umrah = $tanfidh->where(['tnfdhStatus' => 1])->findAll();
-        if (count($umrah) > 0) {
-            foreach ($umrah as $dt) {
-                $ok[] = [
-                    'tanfidh' => $tanfidh->find($dt['tnfdhId']),
-                    'user' => $user->join('countries c', 'c.country_code=users.nationality')
-                            ->join('universities u', 'u.uni_id=users.jamia')
-                            ->join('banks', 'banks.bankId=users.bank')
-                            ->find($dt['userId']),
-                ];
-            }
-        } else {
-            $ok = [];
-        }
-
-        $data['title'] = lang('app.tasrihs');
-        $data['umrah'] = $ok;
-        $data['tasrih'] = $tanfidh->join('users s', 's.id=tanfidh.userId')
-                            ->join('countries c', 'c.country_code=s.nationality')
-                            ->join('universities u', 'u.uni_id=s.jamia')
-                            ->where(['tnfdhStatus'=>0, 'tasrih!='=>null])
+        // $mr = $user
+        //         ->join('countries c', 'c.country_code=users.nationality')
+        //         ->join('universities u', 'u.uni_id=users.jamia')
+        //         ->find(session('id'));
+        // $mushrif = $mr['id'];
+        $data['tasrih'] = $tanfidh->where('tnfdhStatus', null)
+                            ->join('users u', 'u.id=tanfidh.userId')
                             ->findAll();
+        $data['title'] = lang('app.tasrih');
         // dd($data);
-
-        if (session('role') != 'user') {
-            return view('mashruu/tasrih', $data);
-        } else {
-            return redirect()->to('user');
-        } 
+        
+            if (!$data['tasrih']) {
+                return redirect()->to('user');
+            } else {
+                return view('mushrif/tasrih', $data);
+            }
     }
 
     public function download($dt)
@@ -247,7 +262,7 @@ class MashruuController extends BaseController
         helper('form');
 
         $tan = new Mashruu();
-        $umr = new Umrah();
+        $umr = new Tanfidh();
 
         $data['title'] = lang('app.tanfidh').' '.lang('app.done');
         $data['done'] = $tan
@@ -280,7 +295,7 @@ class MashruuController extends BaseController
         helper('form');
 
         $tan = new Mashruu();
-        $umr = new Umrah();
+        $umr = new Tanfidh();
 
         $data['title'] = lang('app.tanfidh').' '.lang('app.start') ;
         $data['start'] = $umr

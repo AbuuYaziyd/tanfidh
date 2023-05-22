@@ -82,7 +82,7 @@ $routes->group('tanfidh', function ($routes) {
     $routes->post('create', 'MashruuController::create', ['filter' => 'auth']);
     $routes->get('connect', 'MashruuController::connect', ['filter' => 'auth']);
     $routes->get('delete', 'MashruuController::delete', ['filter' => 'auth']);
-    $routes->get('tasrih', 'MashruuController::tasrih', ['filter' => 'auth']);
+    $routes->get('tasrih', 'MashruuController::tasrih', ['filter' => 'admin']);
     $routes->get('download/(:any)', 'MashruuController::download/$1', ['filter' => 'auth']);
     $routes->get('tasrih/delete', 'MashruuController::tasrihDelete', ['filter' => 'auth']);
     $routes->get('done', 'MashruuController::done', ['filter' => 'auth']);
@@ -118,21 +118,21 @@ $routes->group('admin', function ($routes) {
  * --------------------------------------------------------------------
  */
 $routes->group('mushrif', function ($routes) {
-    $routes->get('/', 'MushrifController::index', ['filter' => 'mushrif']);
-    $routes->get('users', 'MushrifController::users', ['filter' => 'mushrif']);
-    $routes->get('add', 'MushrifController::add', ['filter' => 'mushrif']);
-    $routes->post('create', 'MushrifController::create', ['filter' => 'mushrif']);
-    $routes->get('judud', 'MushrifController::judud', ['filter' => 'mushrif']);
-    $routes->get('user/(:num)', 'MushrifController::user/$1', ['filter' => 'mushrif']);
-    $routes->get('activate/(:num)', 'MushrifController::activate/$1', ['filter' => 'mushrif']);
-    $routes->get('active/(:num)', 'MushrifController::active/$1', ['filter' => 'mushrif']);
-    $routes->get('tasrih', 'MushrifController::tasrih', ['filter' => 'mushrif']);
-    $routes->get('tasrih-user/(:num)', 'MushrifController::tasrihUser/$1', ['filter' => 'mushrif']);
-    $routes->post('mulahadha/(:num)', 'MushrifController::mulahadha/$1', ['filter' => 'mushrif']);
-    $routes->get('send-tasrih/(:num)', 'MushrifController::sendTasrih/$1', ['filter' => 'mushrif']);
-    $routes->get('tasrih-delete/(:num)', 'MushrifController::tasrihDelete/$1', ['filter' => 'mushrif']);
-    $routes->get('tanfidh', 'MushrifController::tanfidh', ['filter' => 'mushrif']);
-    $routes->get('tanfidh-shahr', 'MushrifController::thisMonthTanfidh', ['filter' => 'mushrif']);
+    $routes->get('/', 'MushrifController::index', ['filter' => 'admin']);
+    $routes->get('users', 'MushrifController::users', ['filter' => 'admin']);
+    $routes->get('add', 'MushrifController::add', ['filter' => 'admin']);
+    $routes->post('create', 'MushrifController::create', ['filter' => 'admin']);
+    $routes->get('judud', 'MushrifController::judud', ['filter' => 'admin']);
+    $routes->get('user/(:num)', 'MushrifController::user/$1', ['filter' => 'admin']);
+    $routes->get('activate/(:num)', 'MushrifController::activate/$1', ['filter' => 'admin']);
+    $routes->get('active/(:num)', 'MushrifController::active/$1', ['filter' => 'admin']);
+    $routes->get('tasrih', 'MushrifController::tasrih', ['filter' => 'admin']);
+    $routes->get('tasrih-user/(:num)', 'MushrifController::tasrihUser/$1', ['filter' => 'admin']);
+    $routes->post('mulahadha/(:num)', 'MushrifController::mulahadha/$1', ['filter' => 'admin']);
+    $routes->get('send-tasrih/(:num)', 'MushrifController::sendTasrih/$1', ['filter' => 'admin']);
+    $routes->get('tasrih-delete/(:num)', 'MushrifController::tasrihDelete/$1', ['filter' => 'admin']);
+    $routes->get('tanfidh', 'MushrifController::tanfidh', ['filter' => 'admin']);
+    $routes->get('tanfidh-shahr', 'MushrifController::thisMonthTanfidh', ['filter' => 'admin']);
 });
 
 /*
@@ -141,14 +141,15 @@ $routes->group('mushrif', function ($routes) {
  * --------------------------------------------------------------------
  */
 $routes->group('umrah', function ($routes) {
-    $routes->post('/', 'UmrahController::index', ['filter' => 'auth']);
-    $routes->post('create', 'UmrahController::create', ['filter' => 'auth']);
-    $routes->get('show/(:num)', 'UmrahController::show/$1', ['filter' => 'auth']);
-    $routes->get('edit/(:num)', 'UmrahController::edit/$1', ['filter' => 'auth']);
-    $routes->post('upload/(:num)', 'UmrahController::update/$1', ['filter' => 'auth']);
-    $routes->post('loc/(:num)', 'UmrahController::loc/$1', ['filter' => 'auth']);
-    $routes->post('makkah/(:num)', 'UmrahController::makkah/$1', ['filter' => 'auth']);
-    $routes->post('miqat/(:num)', 'UmrahController::miqat/$1', ['filter' => 'auth']);
+    $routes->get('/', 'TanfidhController::index', ['filter' => 'auth']);
+    $routes->post('/', 'TanfidhController::index', ['filter' => 'auth']);
+    $routes->post('create', 'TanfidhController::create', ['filter' => 'auth']);
+    $routes->get('show/(:num)', 'TanfidhController::show/$1', ['filter' => 'auth']);
+    $routes->get('edit/(:num)', 'TanfidhController::edit/$1', ['filter' => 'auth']);
+    $routes->post('upload/(:num)', 'TanfidhController::update/$1', ['filter' => 'auth']);
+    $routes->post('loc/(:num)', 'TanfidhController::loc/$1', ['filter' => 'auth']);
+    $routes->post('makkah/(:num)', 'TanfidhController::makkah/$1', ['filter' => 'auth']);
+    $routes->post('miqat/(:num)', 'TanfidhController::miqat/$1', ['filter' => 'auth']);
 });
 
 /*

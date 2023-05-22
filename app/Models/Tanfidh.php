@@ -29,7 +29,7 @@ class Tanfidh extends Model
         'bankInit',
         'iban',
         'userId',
-        'tanfdhDate',
+        'tnfdhDate',
         'tasrih',
         'mushrif',
         'mulahadha',

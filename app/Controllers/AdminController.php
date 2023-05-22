@@ -389,7 +389,7 @@ class AdminController extends BaseController
 
     public function tasrih()
     {
-        $tanfidh = new Umrah();
+        $tanfidh = new Tanfidh();
         
         $data['tasrih'] = $tanfidh->where(['tnfdhStatus' => 0, 'tasrih!=' => null])
                             ->join('users u', 'u.id=tanfidh.userId')
@@ -409,7 +409,7 @@ class AdminController extends BaseController
         // dd($id);
         helper('form');
 
-        $tanfidh = new Umrah();
+        $tanfidh = new Tanfidh();
         $user = new User();
 
         $mr = $user
