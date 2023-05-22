@@ -37,7 +37,7 @@
                                                         <td><?= $data['iqama'] ?></td>
                                                         <td><a href="tel:+966<?= $data['phone'] ?>" class="badge badge-secondary">966<?= $data['phone'] ?></a></td>
                                                         <td><?= $data['level'] ?></td>
-                                                        <td><?= $data['uni_name'] ?></td>
+                                                        <td>الجامعة الإسلامية</td>
                                                         <td><?= $data['country_arNationality'] ?></td>
                                                         <td><?= $data['bankName'] ?></td>
                                                         <td><?= $data['iban'] ?></td>
@@ -81,7 +81,7 @@
                                                     <td><?= $data['iqama'] ?></td>
                                                     <td><a href="tel:+966<?= $data['phone'] ?>" class="badge badge-secondary">966<?= $data['phone'] ?></a></td>
                                                     <td><?= $data['level'] ?></td>
-                                                    <td><?= $data['uni_name'] ?></td>
+                                                    <td>الجامعة الإسلامية</td>
                                                     <td><?= $data['country_arNationality'] ?></td>
                                                     <td><?= $data['bankName'] ?></td>
                                                     <td><?= $data['iban'] ?></td>

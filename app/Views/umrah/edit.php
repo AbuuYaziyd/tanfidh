@@ -15,8 +15,15 @@
                             <h4 class="card-title"><?= lang('app.register') . ' ' . lang('app.to') . ' ' . lang('app.tanfidh') . '  ' . lang('app.umrah') ?><span class="text-muted font-medium-1"> @</span><span class="users-view-username text-muted font-medium-1 "><?= sprintf('%04s',session('malaf')) ?></span></h4>
                             <span class="bagde badge-danger badge-pill mb-2"><?= lang('app.imgErr') ?></span>
                             <div class="row mt-1">
+                                <!-- <input type="file" name="pic1" id="pic1" style="display:none;"/>
+                                <label for="pic1">
+                                    <img src="dist/img/picfilename.png">
+                                </label> -->
                                 <div class="col-12 mb-1">
-                                    <img class="img-fluid mb-2" id="show_image" src="<?= base_url($umrah['tasrih']?? 'app-assets/images/demo/no-image.png') ?>" alt="img">
+                                    <input type="file" name="img" id="image" style="display: none;">
+                                    <label for="image">
+                                        <img class="img-fluid mb-2" id="show_image" src="<?= base_url($umrah['tasrih']?? 'app-assets/images/demo/no-image.png') ?>" alt="img">
+                                    </label>
                                     <fieldset class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -28,12 +35,6 @@
                                             <span class="badge badge-danger"> <?= $errors = $validation->getError('select') ?></span>
                                         <?php endif ?>
                                     </fieldset>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" name="img" id="image" class="custom-file-input">
-                                            <label class="custom-file-label"><?= lang('app.chooseFile') . ' ' . lang('app.tasrih') ?></label>
-                                        </div>
-                                    </div>
                                     <?php if ($validation->getError('img')) : ?>
                                         <span class="badge badge-danger"> <?= $errors = $validation->getError('img') ?></span>
                                     <?php endif ?>

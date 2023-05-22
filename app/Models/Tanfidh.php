@@ -16,7 +16,8 @@ class Tanfidh extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'userId',
-        'tanfdhName',
+        'tnfdhName',
+        'tnfdhSabab',
         'tnfdhStatus',
         'malaf',
         'name',

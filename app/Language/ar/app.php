@@ -156,6 +156,8 @@ return [
     'tasrih' => 'التصريح',
     'download' => 'تنزيل',
     'ramz' => 'رمز',
+    'dead' => 'متوفى',
+    'sick' => 'عاجز',
     'waitingAdd' => 'ينتظر الإضافة',
     'waiting' => 'بانتظار',
     'mulahadha' => 'ملاحضات',

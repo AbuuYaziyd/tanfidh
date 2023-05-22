@@ -4,11 +4,6 @@
     <div class="content-body">
         <div class="row">
             <div class="card col-md-4">
-                <?php if (session('role') == 'admin') : ?>
-                    <div class="card-header">
-                        <a href="<?= base_url('admin/edit-mushrif/'.$user['id']) ?>" class="btn btn-black round <?= $user['mushrif']==null?'disabled':'' ?>"><?= lang('app.edit') ?> <?= lang('app.mushrif') ?> <span class="badge badge-info badge-pill"><?= $mushrif['name']??'' ?></span></a>
-                    </div>
-                <?php endif ?>
                 <div class="text-center">
                     <div class="card-body">
                         <img src="https://ui-avatars.com/api/?name=<?= sprintf('%04s', $user['malaf']) ?>&background=random&length=4" class="rounded-circle  height-150" alt=" avatar">
@@ -38,29 +33,21 @@
                                         <th><?= lang('app.date') ?></th>
                                         <th><?= lang('app.donefor') ?></th>
                                         <th><?= lang('app.status') ?></th>
-                                        <th><?= lang('app.miqat') ?></th>
-                                        <th><?= lang('app.makkah') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($mashruu as $key => $dt) : ?>
                                     <tr>
-                                        <td><b><?= $dt['date'] ?></b></td>
+                                        <td><b><?= $dt['userId'] ?></b></td>
                                         <td>
-                                            <?= $dt['ism'] ?> - <span class="badge badge-info badge-pill"><?= $dt['sabab'] ?></span>
+                                            <?= $dt['userId'] ?> - <span class="badge badge-info badge-pill"><?= $dt['userId'] ?></span>
                                         </td>
                                         <td>
-                                            <?php if ($dt['status'] == 0) : ?>
+                                            <?php if ($dt['tnfdhStatus'] == 0) : ?>
                                             <button type="button" class="btn btn-sm btn-danger round"><?= lang('app.notdone') ?></button>
                                             <?php elseif ($dt['status'] == 1) : ?>
                                             <button type="button" class="btn btn-sm btn-success round"><?= lang('app.done') ?></button>
                                             <?php endif ?>
-                                        </td>                                       
-                                        <td>
-                                            <a href="https://www.latlong.net/c/?lat=<?= $dt['miqatLat'] ?>&long=<?= $dt['miqatLong'] ?>" target="_blank" class="btn btn-sm round btn-primary"><?= lang('app.miqat') ?></a>
-                                        </td>
-                                        <td>
-                                            <a href="https://www.latlong.net/c/?lat=<?= $dt['makkahLat'] ?>&long=<?= $dt['makkahLong'] ?>" target="_blank" class="btn btn-sm round btn-warning"><?= lang('app.makkah') ?></a>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>

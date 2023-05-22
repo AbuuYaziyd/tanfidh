@@ -16,7 +16,7 @@
                     </div>
                     <div class="card-content collapse show">
                         <div class="card-body card-dashboard">
-                            <table class="table table-striped table-bordered responsive">
+                            <table class="table table-striped table-bordered responsive text-center">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -29,11 +29,9 @@
                                         <th><?= lang('app.ism') ?></th>
                                         <th><?= lang('app.sabab') ?></th>
                                         <th><?= lang('app.date') ?></th>
-                                        <th><?= lang('app.amount') ?></th>
-                                        <th><?= lang('app.iban') ?></th>
                                         <th><?= lang('app.bank') ?></th>
-                                        <th><?= lang('app.miqat') ?></th>
-                                        <th><?= lang('app.makkah') ?></th>
+                                        <th><?= lang('app.ramz') ?> <?= lang('app.bank') ?></th>
+                                        <th><?= lang('app.iban') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,16 +42,14 @@
                                             <td><?= $dt['name'] ?></td>
                                             <td><?= $dt['iqama'] ?></td>
                                             <td><a href="tel:+966<?= $dt['phone'] ?>" class="badge badge-secondary">966<?= $dt['phone'] ?></a></td>
-                                            <td><?= $dt['nation'] ?></td>
-                                            <td><?= $dt['jamia'] ?></td>
+                                            <td>تنزانيا</td>
+                                            <td>الجامعة الإسلامية</td>
                                             <td><?= $dt['ism'] ?></td>
-                                            <td><?= $dt['sabab'] ?></td>
-                                            <td><?= $dt['date'] ?></td>
-                                            <td><?= $dt['amount'] ?></td>
-                                            <td><?= $dt['iban'] ?></td>
+                                            <td><?= lang('app.'.$dt['sabab']) ?></td>
+                                            <td><?= date('d/m/Y', strtotime($dt['date'])) ?></td>
                                             <td><?= $dt['bank'] ?></td>
-                                            <td><a href="https://www.latlong.net/c/?lat=<?= $dt['miqatLat'] ?>&long=<?= $dt['miqatLong'] ?>" target="_blank" class="btn btn-sm round btn-primary"><?= lang('app.miqat') ?></a></td>
-                                            <td><a href="https://www.latlong.net/c/?lat=<?= $dt['makkahLat'] ?>&long=<?= $dt['makkahLong'] ?>" target="_blank" class="btn btn-sm round btn-warning"><?= lang('app.makkah') ?></a></td>
+                                            <td><?= $dt['code'] ?></td>
+                                            <td><?= $dt['iban'] ?></td>
                                         </tr>
                                     <?php endforeach ?>
                                 </tbody>

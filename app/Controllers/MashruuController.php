@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\Bank;
+use App\Models\Data;
 use App\Models\Mashruu;
 use App\Models\Notify;
 use App\Models\Setting;
@@ -18,7 +20,11 @@ class MashruuController extends BaseController
         $umr = new Tanfidh();
 
         $data['title'] = lang('app.tanfidh');
+        
         $data['all'] = $umr->where('tnfdhStatus', 0)->join('users u', 'u.id=tanfidh.userId')
+                        ->join('banks b', 'b.bankId=tanfidh.bank')
+                        ->findAll();
+        $data['ready'] = $umr->where('tnfdhStatus', 1)->join('users u', 'u.id=tanfidh.userId')
                         ->join('banks b', 'b.bankId=tanfidh.bank')
                         ->findAll();
         $data['tanfidh'] = $umr->where('tnfdhStatus', '0')->countAllResults();
@@ -137,13 +143,42 @@ class MashruuController extends BaseController
     {
         helper('filesystem');
 
-        $mash = new Mashruu();
         $tan = new Tanfidh();
         $notify = new Notify();
         $set = new Setting();
+        $usr = new User();
+        $bnk = new Bank();
+        $data = new Data();
 
-        $date = date('d-m-Y', strtotime($set->where('info', 'tasrihDate')->first()['extra']));
-        $tasrih = $date.'.zip';
+        $dt = $tan->findAll();
+        // dd($dt);
+        foreach ($dt as $d) {
+            $user = $usr->find($d['userId']);
+            $us = ['umrah' => 'done'];
+            $usr->update($d['userId'], $us);
+            // dd($user);
+
+            $all = [
+                'userId' => $d['userId'],
+                'sabab' => $d['tnfdhSabab'],
+                'bank' => $bnk->find($d['bank'])['bankName'],
+                'mushrif' => $d['mushrif'],
+                'malaf' => $d['malaf'],
+                'date' => date('Y-m-d H:i:s', strtotime($d['tnfdhDate'])),
+                'ism' => $d['tnfdhName'],
+                'name' => $user['name'],
+                'phone' => $user['phone'],
+                'iqama' => $user['iqama'],
+                'iban' => $user['iban'],
+                'code' => $bnk->find($d['bank'])['bankShort'],
+            ];
+            // dd($all);
+
+            $data->save($all);
+        }
+
+        $date = date('dmY', strtotime($set->where('info', 'tasrihDate')->first()['extra']));
+        $tasrih = FCPATH .$date.'.zip';
 
         // dd(file_exists($tasrih));
         // dd(count(directory_map('app-assets/images/tasrih')));
@@ -160,14 +195,12 @@ class MashruuController extends BaseController
         $ok = [
             $tan->emptyTable(),
             $tan->query('ALTER TABLE tanfidh AUTO_INCREMENT = 1'),
-            $mash->emptyTable(),
-            $tan->query('ALTER TABLE mashruu AUTO_INCREMENT = 1'),
             $notify->emptyTable(),
             $tan->query('ALTER TABLE notify AUTO_INCREMENT = 1'),
         ];
         
         if ($ok) {
-            return redirect()->to('tanfidh')->with('type', 'success')->with('text', lang('app.doneSuccess'))->with('title', lang('app.ok'));
+            return redirect()->to('user')->with('type', 'success')->with('text', lang('app.doneSuccess'))->with('title', lang('app.ok'));
         }
     }
 
@@ -188,19 +221,18 @@ class MashruuController extends BaseController
             }
     }
 
-    public function download($dt)
+    public function download()
     {
         $set = new Setting();
         $user = new User();
          
-        $date = $dt. date(' d-m-Y', strtotime($set->where('info', 'tasrihDate')->first()['extra']));
+        $date = date('dmY', strtotime($set->where('info', 'tasrihDate')->first()['extra']));
         // dd($date);
         $source = 'app-assets/images/tasrih';
         $destination = FCPATH.$date;
         $user->zip_creation($source, $destination);
 
         return $this->response->download(FCPATH . $date.'.zip', null);
-        // dont forget to delete the file!
     }
 
     public function done()
@@ -253,5 +285,44 @@ class MashruuController extends BaseController
         // dd($data);
 
         return view('mashruu/started', $data);
+    }
+
+    public function show($id)
+    {
+        // dd($id);
+        helper('form');
+
+        $tanfidh = new Tanfidh();
+
+        $data['user'] = $tanfidh->where(['tnfdhStatus' => 0, 'tnfdhId' => $id])
+                            ->join('users u', 'u.id=tanfidh.userId')
+                            ->join('images', 'u.id=images.userId')
+                            ->first();
+        $data['title'] = lang('app.tasrih');
+        // dd($data);
+        
+        return view('mashruu/user', $data);
+    }
+
+    public function edit($id)
+    {
+        // dd($this->request->getVar());
+
+        $tan = new Tanfidh();
+
+        $dt = [
+          'tnfdhName' => $this->request->getVar('ism'),  
+          'tnfdhSabab' => $this->request->getVar('sabab'), 
+          'tnfdhStatus' => 1, 
+        ];
+        // dd($dt);
+
+        $ok = $tan->update($id, $dt);
+
+        if ($ok) {
+            return redirect()->to('tanfidh')->with('type', 'success')->with('title', lang('app.done'))->with('text', lang('app.doneSuccess'));
+        } else {
+            return redirect()->to('user')->with('type', 'error')->with('title', lang('app.sorry'))->with('text', lang('app.errorOccured'));
+        }
     }
 }

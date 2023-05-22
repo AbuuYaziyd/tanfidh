@@ -83,10 +83,12 @@ $routes->group('tanfidh', function ($routes) {
     $routes->get('connect', 'MashruuController::connect', ['filter' => 'auth']);
     $routes->get('delete', 'MashruuController::delete', ['filter' => 'auth']);
     $routes->get('tasrih', 'MashruuController::tasrih', ['filter' => 'admin']);
-    $routes->get('download/(:any)', 'MashruuController::download/$1', ['filter' => 'auth']);
-    $routes->get('tasrih/delete', 'MashruuController::tasrihDelete', ['filter' => 'auth']);
+    $routes->get('download', 'MashruuController::download', ['filter' => 'admin']);
+    $routes->get('tasrih/delete', 'MashruuController::delete', ['filter' => 'admin']);
     $routes->get('done', 'MashruuController::done', ['filter' => 'auth']);
     $routes->get('start', 'MashruuController::start', ['filter' => 'auth']);
+    $routes->get('show/(:num)', 'MashruuController::show/$1', ['filter' => 'admin']);
+    $routes->post('edit/(:num)', 'MashruuController::edit/$1', ['filter' => 'admin']);
 });
 
 /*

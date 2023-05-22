@@ -1,3 +1,12 @@
+
+<?php
+
+use App\Models\User;
+
+$usr = new User();
+
+$user = $usr->find(session('id'));
+?>
 <div class="col-md-4">
     <div class="card crypto-card-3 pull-up">
         <div class="card-content">
@@ -62,7 +71,7 @@
         </div>
     </div>
 </div>
-<?php if (!$set) : ?>
+<?php if (!$set || $user['umrah']!=null) : ?>
     <div class="col-md-4 col-12">
         <div class="card crypto-card-3 pull-up">
             <div class="card-content">
@@ -76,7 +85,11 @@
                             <h6 class="text-muted"><?= lang('app.baarik') ?></h6>
                         </div>
                         <div class="col-3 text-right">
-                            <h4 class="danger"><?= lang('app.near') ?></h4>
+                            <?php if ($user['umrah']!=null) : ?>
+                                <h4 class="btn btn-black round"><?= lang('app.done') ?></h4>
+                            <?php else : ?>
+                                <h4 class="btn btn-teal round"><?= lang('app.near') ?></h4>
+                            <?php endif ?>
                         </div>
                     </div>
                 </div>
@@ -113,20 +126,20 @@
                                 </div>
                                 <div class="col-5 text-right">
                                     <?php if ($umra['tasrih']==null) : ?>
-                                        <h4 class="danger blink"><b><?= lang('app.tasrih') ?></b></h4>
+                                        <h4 class="btn btn-danger round blink"><b><?= lang('app.tasrih') ?></b></h4>
                                     <?php elseif ($umra['tnfdhStatus']==null) : ?>
-                                        <h4 class="warning blink"><b><?= lang('app.mushrif') ?></b></h4>
+                                        <h4 class="btn btn-warning round blink"><b><?= lang('app.mushrif') ?></b></h4>
                                     <?php elseif ($umra['tnfdhStatus']==0) : ?>
-                                        <h4 class="success blink"><b><?= lang('app.underAction') ?></b></h4>
+                                        <h4 class="btn btn-success round blink"><b><?= lang('app.underAction') ?></b></h4>
                                     <?php elseif ($umra['tnfdhDate']>date('Y/m/d')): ?>
-                                        <h4 class="success typewriter"><b><?= lang('app.registered') ?></b></h4>
+                                        <h4 class="btn btn-success round typewriter"><b><?= lang('app.registered') ?></b></h4>
                                     <?php else : ?>
                                         <?php if ($umra['miqatLat']==null) : ?>
-                                            <h4 class="info blink"><b><?= lang('app.miqat') ?></b></h4>
+                                            <h4 class="btn btn-info round blink"><b><?= lang('app.miqat') ?></b></h4>
                                         <?php elseif ($umra['makkahLat']==null) : ?>
-                                            <h4 class="black blink"><b><?= lang('app.makkah') ?></b></h4>
+                                            <h4 class="btn btn-purple round blink"><b><?= lang('app.makkah') ?></b></h4>
                                         <?php else : ?>
-                                            <h4 class="success typewriter"><b><?= lang('app.done') ?> <?= lang('app.tanfidh') ?><br> <?= lang('app.umrah') ?></b></h4>
+                                            <h4 class="btn btn-amber round typewriter"><b><?= lang('app.done') ?> <?= lang('app.tanfidh') ?><br> <?= lang('app.umrah') ?></b></h4>
                                         <?php endif ?>
                                     <?php endif ?>
                                 </div>

@@ -51,7 +51,8 @@ class TanfidhController extends BaseController
             $reg = [
                 'userId' => $id,
                 'malaf' => session('malaf'),
-                // 'tnfdhDate' => $tanfidh,
+                'tnfdhDate' => $tanfidh,
+                'bank' => $user['bank'],
                 'mushrif' => $usr->where('role', 'admin')->first()['name'],
             ];
             // dd($reg);
@@ -108,7 +109,7 @@ class TanfidhController extends BaseController
         // $mushrif = $nt.' - '. $jm;
         // $upl = 'tasrih';
         // $next = $user['tnfdhDate'];
-        dd($user);
+        // dd($user);
 
         $validationRule = $this->validate(
             [
@@ -128,15 +129,15 @@ class TanfidhController extends BaseController
 
             helper('form');
             $data['title'] = lang('app.data');
-            dd($data['errors']['img']);
-            return redirect()->to('umrah/show/'.$id)->with('type', 'error')->with('title', lang(
-            'app.errorOccured'))->with('text', $data['errors']['img']);
+            // dd($data['errors']['img']);
+            return redirect()->to('umrah/show/'.$id)->with('type', 'error')->with('text', lang(
+            'app.errorOccured'))->with('title', $data['errors']['img']);
         }
 
         // dd(file_exists($user['tasrih']));
         if (file_exists($user['tasrih'])) {
 
-            dd($user['tasrih']);
+            // dd($user['tasrih']);
             unlink($user['tasrih']);
 
             $img = $this->request->getFile('img');
@@ -148,9 +149,9 @@ class TanfidhController extends BaseController
                 'tasrih' => $loc,
                 'mulahadha' => null,
             ];
-            dd($ppn);
+            // dd($ppn);
 
-            dd($notf);
+            // dd($notf);
             if ($notf != null) {
                 foreach ($notf as $value) {
                     $notfy->delete($value['id']);

@@ -160,7 +160,7 @@ class AdminController extends BaseController
     {
         $user = new User();
         $image = new Image();
-        $mash = new Mashruu();
+        $mash = new tanfidh();
 
         $data['user'] = $user->join('countries c', 'c.country_code=users.nationality')
                         ->join('universities u', 'u.uni_id=users.jamia')
@@ -177,11 +177,7 @@ class AdminController extends BaseController
         $data['title'] = lang('app.user');
         // dd($data);
 
-        if (session('role') == 'admin') {
-            return view('admin/user', $data);
-        } else {
-            return redirect()->to('user');
-        } 
+        return view('admin/user', $data);
     }
 
     public function all()
