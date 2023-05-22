@@ -29,7 +29,7 @@ class Mashruu extends Model
         'jamia',
         'iban',
         'bank',
-        'userId',
+        'name',
         'phone',
         'malaf',
         'name',

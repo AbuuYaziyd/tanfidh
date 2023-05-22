@@ -225,7 +225,7 @@
         </div>
     </a>
 </div>
-<?php if ($tasrihAll >= 1) : ?>
+<?php if ($tasrih >= 1) : ?>
     <div class="col-md-3">
         <a href="<?= base_url('tanfidh/tasrih') ?>">
             <div class="card pull-up">
@@ -234,7 +234,7 @@
                         <div class="media d-flex">
                             <div class="media-body text-left">
                                 <h3 class="info"><?= lang('app.tasrihs')  ?></h3>
-                                <h6><?= $tasrihAll ?></h6>
+                                <h6><?= $tasrih ?></h6>
                             </div>
                             <div>
                                 <i class="icon-docs info font-large-3 float-right"></i>
@@ -249,6 +249,7 @@
         </a>
     </div>
 <?php endif ?>
+<?php if ($tasrihAll >= 1) : ?>
 <div class="col-md-3">
     <a href="<?= base_url('tanfidh') ?>">
         <div class="card pull-up">
@@ -257,11 +258,7 @@
                     <div class="media d-flex">
                         <div class="media-body text-left">
                             <h3 class="primary"><?= lang('app.tanfidh') ?></h3>
-                            <?php if ($tanfidh>0) : ?>
-                                <h6><?= $tanfidh ?>/<?= $makka ?>/<?= $tasrihAll ?></h6>
-                            <?php elseif ($tanfidh>0) : ?>
-                                <h6><?= $makka ?>/<?= $tasrihAll ?></h6>
-                            <?php elseif ($makka>0) : ?>
+                            <?php if ($tasrihAll>0) : ?>
                                 <h6><?= $tasrihAll ?></h6>
                             <?php else : ?>
                                 <h6><?= lang('app.near') ?></h6>
@@ -279,6 +276,7 @@
         </div>
     </a>
 </div>
+<?php endif ?>
 <div class="col-md-3">
     <a href="<?= base_url('admin/tanfidh') ?>">
         <div class="card pull-up">

@@ -15,27 +15,11 @@ class MashruuController extends BaseController
     {
         helper('form');
 
-        $tan = new Mashruu();
         $umr = new Tanfidh();
 
         $data['title'] = lang('app.tanfidh');
-        $data['all'] = $tan
-                        ->join('banks b', 'b.bankId=mashruu.bank')
-                        ->join('universities v', 'v.uni_id=mashruu.jamia')
-                        ->join('countries c', 'c.country_code=mashruu.nation')
-                        ->join('users u', 'u.id=mashruu.userId')
-                        ->findAll();
-        $data['done'] = $tan
-                        ->where(['mashruu.status' => '1','miqatLat!=' => null, 'makkahLat!=' => null])
-                        ->countAllResults();
-        $data['wait'] = $umr
-                        ->where(['tnfdhStatus' => '0', 'miqatLat' => null])
-                        ->countAllResults();
-        $data['start'] = $umr
-                        ->where(['tnfdhStatus' => 'sent', 'miqatLat!=' => null])
-                        ->countAllResults();
-        $data['new1'] = $tan
-                        ->where('mashruu.status', null)
+        $data['all'] = $umr->where('tnfdhStatus', 0)->join('users u', 'u.id=tanfidh.userId')
+                        ->join('banks b', 'b.bankId=tanfidh.bank')
                         ->findAll();
         $data['tanfidh'] = $umr->where('tnfdhStatus', '0')->countAllResults();
         $data['delete'] = $umr->where('tnfdhStatus', 'done')->countAllResults() == $umr->countAllResults();

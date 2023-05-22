@@ -261,7 +261,7 @@ class MushrifController extends BaseController
                             ->join('users u', 'u.id=tanfidh.userId')
                             ->findAll();
         $data['title'] = lang('app.tasrih');
-        dd($data);
+        // dd($data);
         
             if (!$data['tasrih']) {
                 return redirect()->to('user');
@@ -333,9 +333,16 @@ class MushrifController extends BaseController
     public function sendTasrih($id)
     {
         $tanfidh = new Tanfidh();
+        $usr = new User();
+
+        $user_id = $tanfidh->find($id)['userId'];
+        $bank = $usr->find($user_id)['bank'];
+
+        // dd($bank);
 
         $data = [
             'tnfdhStatus' => 0,
+            'bank' => $bank,
         ];
         // dd($data);
 

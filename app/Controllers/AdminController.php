@@ -28,8 +28,8 @@ class AdminController extends BaseController
         $role = $user->find(session('id'));
 
         $data['mushrif'] = $user->where('role', 'mushrif')->countAllResults();
-        $data['makka'] = $tanfidh->where(['makkahLat' => null,'miqatLat!=' => null])->countAllResults();
-        $data['tanfidh'] = $tanfidh->where(['miqatLat' => null])->countAllResults();
+        // $data['makka'] = $tanfidh->where(['makkahLat' => null,'miqatLat!=' => null])->countAllResults();
+        // $data['tanfidh'] = $tanfidh->where(['miqatLat' => null])->countAllResults();
         $data['judud'] = $user->where(['malaf' => null, 'status' => 0])->countAllResults();
         $data['set'] = $set->where(['info' => 'tasrihDate', 'extra>=' => date('Y-m-d')])->first();
         $data['full'] = count($user->findAll());
@@ -37,7 +37,8 @@ class AdminController extends BaseController
         // $data['nationality'] = count($user->groupBy('nationality')->where('nationality!=', null)->findAll());
         $data['title'] = lang('app.dashboard');
         $data['tasrihNow'] = $tanfidh->where(['tasrih!=' => null, 'tnfdhStatus' => null])->countAllResults();
-        $data['tasrihAll'] = $tanfidh->countAllResults();
+        $data['tasrih'] = $tanfidh->where('tnfdhStatus', null)->countAllResults();
+        $data['tasrihAll'] = $tanfidh->where('tnfdhStatus', 0)->countAllResults();
         
         // $data['lead'] = $tanfidh->where('mushrif', session('id'))->countAllResults();
         $data['status'] = $tanfidh->where(['tnfdhStatus' => 'done','mushrif', session('id')])->countAllResults();

@@ -2,113 +2,56 @@
 
 <?= $this->section('content') ?>
     <div class="content-body">
-        <div id="recent-transactions" class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3>
-                        <b><?= lang('app.peopletobedonefor') ?></b>
-                        <a href="<?= base_url('tanfidh/tasrih') ?>" class="btn pull-left round btn-black" target="_blank"><?= lang('app.tasrih') ?> 
-                            <span class="badge badge-info badge-pill"><?= $tanfidh ?></span>
-                        </a>
-                    </h3>
-                </div>
-                <div class="card-content">
-                    <?php $validation = \Config\Services::validation(); ?>
-                    <?= form_open_multipart('tanfidh/create') ?>
-                        <div class="row p-1 m-1">
-                            <div class="col-md-4">
-                                <a href="<?= base_url('app-assets/tanfidh.csv') ?>" download="tanfidh.csv" class="btn btn-outline-success btn-block round m-2">tanfdh.csv</a>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="ml-1"><b><?= lang('app.chooseFileIfyouhavedownlad') ?></b></label>
-                                <?php if ($validation->getError('csv')) : ?>
-                                    <span class="badge badge-danger"> <?= $errors = $validation->getError('csv') ?></span>
-                                <?php endif ?>
-                                <div class="input-group ">
-                                    <div class="custom-file">
-                                        <input type="file" name="csv" id="image" class="custom-file-input" id="inputGroupFile02">
-                                        <label class="custom-file-label"><?= lang('app.chooseFile') ?></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row px-1 mb-1">
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-block btn-lg"><?= lang('app.add') ?></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <a href="<?= base_url('tanfidh/download/'.date('0h7is')) ?>" class="btn btn-lg btn-primary btn-block"><?= lang('app.download') ?> <?= lang('app.tasrih') ?></a>
             </div>
         </div>
         <div class="row">
-            <?php if ($wait>0) : ?>
-            <div class="col-md-4 mb-1">
-                <a href="<?= base_url('tanfidh/connect') ?>" class="btn btn-block btn-outline-warning btn-lg" <?= $wait>0?'':'style="pointer-events: none;"' ?>><?= lang('app.waiting') ?> (<?= $wait ?>)</a>
-            </div>
-            <div class="col-md-4 mb-1">
-                <a href="<?= base_url('tanfidh/start') ?>" class="btn btn-block btn-outline-info btn-lg" <?= $start>0?'':'style="pointer-events: none;"' ?>><?= lang('app.start') ?> (<?= $start ?>)</a>
-            </div>
-            <div class="col-md-4 mb-1">
-                <a href="<?= base_url('tanfidh/done') ?>" class="btn btn-block btn-outline-black btn-lg"><?= lang('app.done') ?> (<?= $done ?>)</a>
-            </div>
-            <?php elseif ($start>0) : ?>
-            <div class="col-md-6 mb-1">
-                <a href="<?= base_url('tanfidh/start') ?>" class="btn btn-block btn-outline-info btn-lg" <?= $start>0?'':'style="pointer-events: none;"' ?>><?= lang('app.start') ?> (<?= $start ?>)</a>
-            </div>
-            <div class="col-md-6 mb-1">
-                <a href="<?= base_url('tanfidh/done') ?>" class="btn btn-block btn-outline-black btn-lg"><?= lang('app.done') ?> (<?= $done ?>)</a>
-            </div>
-            <?php elseif ($done>0) : ?>
-            <div class="col mb-1">
-                <a href="<?= base_url('tanfidh/done') ?>" class="btn btn-block btn-outline-black btn-lg"><?= lang('app.done') ?> (<?= $done ?>)</a>
-            </div>
-            <?php endif ?>
-        </div>
-        <?php if ($new1) : ?>
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2>
-                                <b><?= $title ?></b> 
-                                <span class="badge badge badge-info badge-pill mr-2"><?= $tanfidh ?></span>
-                            </h2>
-                        </div>
-                        <div class="card-content collapse show">
-                            <div class="card-body card-dashboard">
-                                <table class="table table-striped table-bordered dataex-res-constructor">
-                                    <thead>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><?= $title ?></h2>
+                    </div>
+                    <div class="card-content collapse show">
+                        <div class="card-body card-dashboard">
+                            <table class="table table-striped table-bordered responsive">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th><?= lang('app.malaf') ?></th>
+                                        <th><?= lang('app.name') ?></th>
+                                        <th><?= lang('app.iqama') ?></th>
+                                        <th><?= lang('app.phone') ?></th>
+                                        <th><?= lang('app.level') ?></th>
+                                        <th><?= lang('app.jamia') ?></th>
+                                        <th><?= lang('app.nationality') ?></th>
+                                        <th><?= lang('app.bank') ?></th>
+                                        <th><?= lang('app.iban') ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($all as $key => $data) : ?>
                                         <tr>
-                                            <th>#</th>
-                                            <th><?= lang('app.ism') ?></th>
-                                            <th><?= lang('app.sabab') ?></th>
+                                            <td><?= $key + 1 ?></td>
+                                            <td><a href="<?= base_url('admin/show/' . $data['userId']) ?>" class="badge badge-pill badge-info"><?= sprintf('%04s', $data['malaf']) ?></a></td>
+                                            <td><?= $data['userId'] ?></td>
+                                            <td><?= $data['iqama'] ?></td>
+                                            <td><a href="tel:+966<?= $data['phone'] ?>" class="badge badge-secondary">966<?= $data['phone'] ?></a></td>
+                                            <td><?= $data['level'] ?></td>
+                                            <td>الجامعة الإسلامية</td>
+                                            <td>تنزانيا</td>
+                                            <td><?= $data['bankName'] ?></td>
+                                            <td><?= $data['iban'] ?></td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($new1 as $key => $dt) : ?>
-                                            <tr>
-                                                <td><?= $key+1 ?></td>
-                                                <td><?= $dt['ism'] ?></td>
-                                                <td><?= $dt['sabab'] ?></td>
-                                            </tr>
-                                        <?php endforeach ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    <?php endforeach ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php endif ?>
+        </div>
     </div>
-<script>
-    (function (window, document, $) {
-        'use strict';
-        $('.custom-file input').change(function (e) {
-            $(this).next('.custom-file-label').html(e.target.files[0].name);
-        });
-    })(window, document, jQuery);
-</script>
 <?= $this->endSection() ?>
 <?= $this->include('layouts/table') ?>

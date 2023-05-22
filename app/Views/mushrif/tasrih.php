@@ -5,11 +5,6 @@
         <div class="content-body">
             <section id="configuration">
                 <div class="row">
-                    <div class="col-12">
-                        <a href="<?= base_url('tanfidh/download/'.date('0h7is')) ?>" class="btn btn-lg btn-primary btn-block"><?= lang('app.download') ?> <?= lang('app.tasrih') ?></a>
-                    </div>
-                </div>
-                <div class="row">
                     <?php foreach ($tasrih as $dt) : ?>
                         <?php if ($dt['tasrih']!=null && $dt['tnfdhDate']>=date('Y-m-d')) : ?>
                             <div class="col-md-4">
