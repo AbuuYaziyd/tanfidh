@@ -60,7 +60,7 @@ return [
     'setting' => 'إعداد', 
     'active' => 'نشيط', 
     'activate' => 'تنشيط', 
-    'warning' => 'تنبيه', 
+    'warning' => '!تنبيه', 
     'filesOkSms' => 'هل ملفته ينطبق معلومته؟', 
     'notactive' => 'غير نشيط', 
     'underAction' => 'تحت المراجعة', 
@@ -101,7 +101,7 @@ return [
     'groupDone' => 'تم إضافة المجموعة في الموقع بنجاح',
 
     // Admin Pages
-    'admin' => 'مدير',
+    'admin' => 'مشرف',
     'addMushrif' => 'اجعله مشرفا',
 
     // User Pages

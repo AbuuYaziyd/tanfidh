@@ -1,3 +1,4 @@
+<?php header('Refresh: 5; URL='.base_url('login')); ?>
 <!DOCTYPE html>
 <html class="loading" lang="ar" data-textdirection="rtl">
 <!-- BEGIN: Head-->
@@ -7,8 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta name="description" content="هدية الحاج والعمرة">
-    <meta name="keywords"
-        content="هدية الحاج والعمرة,  حاج ,حجاج, مناسكو مكة, مدينة, مسجد النبوي, مسجد الحرم">
+    <meta name="keywords" content="هدية الحاج والعمرة,  حاج ,حجاج, مناسكو مكة, مدينة, مسجد النبوي, مسجد الحرم">
     <meta name="author" content="abouyaziyd">
 	<title><?= APP_NAME . ' | ' . $title ?></title>
     <link rel="apple-touch-icon" href="<?= base_url('app-assets/images/logo/logo.png') ?>">

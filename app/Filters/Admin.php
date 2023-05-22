@@ -20,7 +20,7 @@ class Admin implements FilterInterface
         }
         
         if ($auth['role'] != 'admin') {
-            return redirect()->to('user');
+            return redirect()->to('user')->with('type', 'warning')->with('title', lang('app.warning'))->with('text', lang('app.authorisedPersonellOnly'));
         }
         
     }

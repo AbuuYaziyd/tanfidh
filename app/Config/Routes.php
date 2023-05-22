@@ -96,14 +96,10 @@ $routes->group('tanfidh', function ($routes) {
  */
 $routes->group('admin', function ($routes) {
     $routes->get('/', 'AdminController::index', ['filter' => 'admin']);
-    $routes->get('jamiat', 'AdminController::jamiat', ['filter' => 'admin']);
     $routes->get('jamia/(:num)', 'AdminController::jamia/$1', ['filter' => 'admin']);
-    $routes->get('nationality', 'AdminController::nationality', ['filter' => 'admin']);
     $routes->get('nat/(:any)', 'AdminController::nat/$1', ['filter' => 'admin']);
     $routes->get('all', 'AdminController::all', ['filter' => 'admin']);
     $routes->get('users/(:any)/(:num)', 'AdminController::users/$1/$2', ['filter' => 'admin']);
-    $routes->get('mushrifuna', 'AdminController::mushrifuna', ['filter' => 'admin']);
-    $routes->get('judud', 'AdminController::judud', ['filter' => 'admin']);
     $routes->get('activate/(:num)', 'AdminController::activate/$1', ['filter' => 'admin']);
     $routes->post('activate-all', 'AdminController::activateAll', ['filter' => 'admin']);
     $routes->get('show/(:num)', 'AdminController::show/$1', ['filter' => 'admin']);
@@ -145,7 +141,6 @@ $routes->group('mushrif', function ($routes) {
  * --------------------------------------------------------------------
  */
 $routes->group('umrah', function ($routes) {
-    $routes->get('/', 'UmrahController::index', ['filter' => 'auth']);
     $routes->post('/', 'UmrahController::index', ['filter' => 'auth']);
     $routes->post('create', 'UmrahController::create', ['filter' => 'auth']);
     $routes->get('show/(:num)', 'UmrahController::show/$1', ['filter' => 'auth']);

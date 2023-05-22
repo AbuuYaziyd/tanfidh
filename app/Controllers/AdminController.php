@@ -32,20 +32,20 @@ class AdminController extends BaseController
         $data['tanfidh'] = $tanfidh->where(['miqatLat' => null])->countAllResults();
         $data['judud'] = $user->where(['malaf' => null, 'status' => 0])->countAllResults();
         $data['set'] = $set->where(['info' => 'tasrihDate', 'extra>=' => date('Y-m-d')])->first();
-        $data['full'] = count($user->where('role!=', 'admin')->findAll());
-        $data['jamia'] = count($user->groupBy('jamia')->where('jamia!=', null)->findAll());
-        $data['nationality'] = count($user->groupBy('nationality')->where('nationality!=', null)->findAll());
+        $data['full'] = count($user->findAll());
+        // $data['jamia'] = count($user->groupBy('jamia')->where('jamia!=', null)->findAll());
+        // $data['nationality'] = count($user->groupBy('nationality')->where('nationality!=', null)->findAll());
         $data['title'] = lang('app.dashboard');
         $data['tasrihNow'] = $tanfidh->where(['tasrih!=' => null, 'tnfdhStatus' => null])->countAllResults();
         $data['tasrihAll'] = $tanfidh->countAllResults();
         
-        $data['lead'] = $tanfidh->where('mushrif', session('id'))->countAllResults();
+        // $data['lead'] = $tanfidh->where('mushrif', session('id'))->countAllResults();
         $data['status'] = $tanfidh->where(['tnfdhStatus' => 'done','mushrif', session('id')])->countAllResults();
-        $data['judud0'] = $user->where(['malaf' => null, 'status' => null, 'jamia' => $role['jamia'], 'nationality' => $role['nationality']])->countAllResults();
-        $data['judud1'] = $user->where(['malaf' => null, 'status' => 0, 'jamia' => $role['jamia'], 'nationality' => $role['nationality']])->countAllResults();
+        // $data['judud0'] = $user->where(['malaf' => null, 'status' => null, 'jamia' => $role['jamia'], 'nationality' => $role['nationality']])->countAllResults();
+        // $data['judud1'] = $user->where(['malaf' => null, 'status' => 0, 'jamia' => $role['jamia'], 'nationality' => $role['nationality']])->countAllResults();
         $data['set'] = $set->where(['info' => 'tasrihDate', 'extra>=' => date('Y-m-d')])->first();
-        $data['total'] = $user->where(['nationality' => $role['nationality'], 'jamia' => $role['jamia'],'role!=' => 'admin'])->countAllResults();
-        $data['full'] = $user->where('role!=', 'admin')->countAllResults();
+        // $data['total'] = $user->where(['nationality' => $role['nationality'], 'jamia' => $role['jamia'],'role!=' => 'admin'])->countAllResults();
+        // $data['full'] = $user->where('role!=', 'admin')->countAllResults();
         // $data['tasrihNow'] = $tanfidh->where(['tasrih!=' => null, 'mushrif' => session('id'), 'tnfdhStatus!=' => null])->countAllResults();
         // $data['tasrihAll'] = $tanfidh->where(['tasrih!=' => null, 'mushrif' => session('id')])->countAllResults();
         // $data['title'] = lang('app.dashboard');
@@ -54,39 +54,9 @@ class AdminController extends BaseController
         $data['month'] = $dt->where(['month(created_at)' => date('m'), 'userId' => session('id')])->findAll();
         // dd($data);
 
-        if (session('role') == 'admin') {
-            return view('admin/index', $data);
-        } else {
-            return redirect()->to('user');
-        }   
+        return view('admin/index', $data);  
     }
 
-    public function jamiat()
-    {
-        $user = new User();
-        $uni = new University();
-
-        $data['title'] = lang('app.jamiat');
-        $jamia = $user->groupBy('jamia')->findAll();
-        foreach ($jamia as $jm) {
-            if ($jm['jamia'] != null) {
-                $m[] = [
-                'jm' => $user->where(['jamia' => $jm['jamia'], 'role!=' => 'admin'])->countAllResults(),
-                'jamia' => $uni->find($jm['jamia'])['uni_name'],
-                'uni' => $uni->find($jm['jamia'])['uni_id'],
-                ];
-            }
-        }
-        $data['jamia'] = $m;
-        $data['uni'] = $uni->findAll();
-        // dd($data);
-
-        if (session('role') == 'admin') {
-            return view('admin/jamiat', $data);
-        } else {
-            return redirect()->to('user');
-        } 
-    }
     
     public function jamia($jm)
     {
@@ -114,31 +84,6 @@ class AdminController extends BaseController
         } 
     }
 
-    public function nationality()
-    {
-        $user = new User();
-        $nt = new Country();
-
-        $data['title'] = lang('app.nationalities');
-        $nat = $user->groupBy('nationality')->findAll();
-        foreach ($nat as $jm) {
-            if ($jm['nationality'] != null) {
-                $m[] = [
-                'jm' => $user->where(['nationality' => $jm['nationality'], 'role!=' => 'admin'])->countAllResults(),
-                'nationality' => $nt->where('country_code', $jm['nationality'])->first()['country_arName'],
-                'nat' => $jm['nationality']
-                ];
-            }
-        }
-        $data['nationality'] = $m;
-        // dd($data);
-
-        if (session('role') == 'admin') {
-            return view('admin/nationality', $data);
-        } else {
-            return redirect()->to('user');
-        } 
-    }
     
     public function nat($nt)
     {
@@ -196,25 +141,6 @@ class AdminController extends BaseController
         } 
     }
 
-    public function mushrifuna()
-    {
-        $user = new User();
-
-        $data['title'] = lang('app.mushrifuna');
-        $data['type'] = 'mushrif';
-        $data['users'] = $user->where('role', 'mushrif')
-                            ->join('countries n', 'n.country_code=users.nationality')
-                            ->join('universities u', 'u.uni_id=users.jamia')
-                            ->findAll();
-        // dd($data);
-
-        if (session('role') == 'admin') {
-            return view('admin/users', $data);
-        } else {
-            return redirect()->to('user');
-        } 
-    }
-
     public function addMushrif($id)
     {
         $user = new User();
@@ -261,7 +187,12 @@ class AdminController extends BaseController
     {
         $user = new User();
 
-        $data['users'] = $user->where( 'role!=', 'admin')
+        $data['users'] = $user
+                            ->join('countries c', 'c.country_code=users.nationality')
+                            ->join('universities u', 'u.uni_id=users.jamia')
+                            ->join('banks', 'banks.bankId=users.bank')
+                            ->findAll();
+        $data['judud'] = $user->where('malaf', null)
                             ->join('countries c', 'c.country_code=users.nationality')
                             ->join('universities u', 'u.uni_id=users.jamia')
                             ->join('banks', 'banks.bankId=users.bank')
@@ -269,11 +200,7 @@ class AdminController extends BaseController
         $data['title'] = lang('app.students');
         // dd($data);
 
-        if (session('role') == 'admin') {
-            return view('admin/all', $data);
-        } else {
-            return redirect()->to('user');
-        } 
+        return view('admin/all', $data);
     }
 
     public function delete($id)
@@ -285,19 +212,6 @@ class AdminController extends BaseController
         if ($ok) {
             return redirect()->to('admin/view')->with('type', 'success')->with('title', lang('app.done'))->with('text', lang('app.delete') . ' ' . lang('app.student') . ' ' . lang('app.success'));
         }
-    }
-
-    public function judud()
-    {
-        $user = new User();
-        $data['users'] = $user->where(['malaf' => null, 'status' => 0])->findAll();
-        $data['title'] = lang('app.judud');
-
-        if (session('role') == 'admin') {
-            return view('admin/judud', $data);
-        } else {
-            return redirect()->to('user');
-        } 
     }
 
     public function activate($id)
