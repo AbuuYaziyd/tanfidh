@@ -43,9 +43,7 @@ class UserController extends BaseController
         // dd($data);
 
         if (!$auth) {
-            if ($role['role'] == 'superuser') {
-                return redirect()->to('admin');
-            }elseif ($role['role'] == 'admin') {
+            if ($role['role'] != 'user') {
                 return redirect()->to('admin');
             }else {
                 if(!$image) {
@@ -55,8 +53,8 @@ class UserController extends BaseController
                     // dd($image);
                     return redirect()->to('image');
                 } else {
-                    if ($role['role'] == 'mushrif') {
-                        return redirect()->to('mushrif');
+                    if ($role['role'] != 'admin') {
+                        return redirect()->to('admin');
                     } else {
                         return view('user/index', $data);
                     }

@@ -189,56 +189,18 @@ class MashruuController extends BaseController
 
     public function tasrih()
     {
-    //     $tanfidh = new Tanfidh();
-    //     $user = new User();
-
-    //     $umrah = $tanfidh->where(['tnfdhStatus' => null])
-    //                     ->join('users us', 'us.id=tanfidh.userid')
-    //                     ->findAll();
-    //                     // dd($umrah);
-    //     // $umrah = $tanfidh->where(['tnfdhStatus' => 1])->findAll();
-    //     if (count($umrah) > 0) {
-    //         foreach ($umrah as $dt) {
-    //             $ok[] = [
-    //                 'tanfidh' => $tanfidh->find($dt['tnfdhId']),
-    //                 'user' => $user->join('countries c', 'c.country_code=users.nationality')
-    //                         ->join('universities u', 'u.uni_id=users.jamia')
-    //                         ->join('banks', 'banks.bankId=users.bank')
-    //                         ->find($dt['userId']),
-    //             ];
-    //         }
-    //     } else {
-    //         $ok = [];
-    //     }
-
-    //     $data['title'] = lang('app.tasrihs');
-    //     $data['umrah'] = $ok;
-    //     $data['tasrih'] = $tanfidh->join('users s', 's.id=tanfidh.userId')
-    //                         ->join('countries c', 'c.country_code=s.nationality')
-    //                         ->join('universities u', 'u.uni_id=s.jamia')
-    //                         ->where(['tnfdhStatus'=>null, 'tasrih!='=>null])
-    //                         ->findAll();
-    //     // dd($data);
-
-    //     return view('mashruu/tasrih', $data);
         $tanfidh = new Tanfidh();
-        $user = new User();
 
-        // $mr = $user
-        //         ->join('countries c', 'c.country_code=users.nationality')
-        //         ->join('universities u', 'u.uni_id=users.jamia')
-        //         ->find(session('id'));
-        // $mushrif = $mr['id'];
         $data['tasrih'] = $tanfidh->where('tnfdhStatus', null)
                             ->join('users u', 'u.id=tanfidh.userId')
                             ->findAll();
         $data['title'] = lang('app.tasrih');
         // dd($data);
         
-            if (!$data['tasrih']) {
-                return redirect()->to('user');
-            } else {
+            if (count($data['tasrih'])>=0) {
                 return view('mushrif/tasrih', $data);
+            } else {
+                return redirect()->to('user')->with('type', 'success')->with('title', lang('app.done'))->with('text', lang('app.tasrihActivated'));
             }
     }
 

@@ -60,6 +60,7 @@ return [
     'setting' => 'إعداد', 
     'active' => 'نشيط', 
     'activate' => 'تنشيط', 
+    'tasrihActivated' => 'تم تنشيط التصاريح!', 
     'warning' => '!تنبيه', 
     'filesOkSms' => 'هل ملفته ينطبق معلومته؟', 
     'notactive' => 'غير نشيط', 

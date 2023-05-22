@@ -27,7 +27,7 @@
                                     </fieldset>
                                 <?php endif ?>
                             <img class="img-fluid mb-2" id="show_image" src="<?= base_url('app-assets/images/' . ($img[$type] == null ? 'demo/no-image.png' : 'malaf/'.(session('malaf')=='----'?'new':session('malaf')).'/') . $img[$type]) ?>" alt="img">
-                                    <p><code style="font-family: Cairo;"><?= lang('app.imgErr') ?></code></p>
+                                    <p><span class="badge badge-danger bdage-pill"><?= lang('app.imgErr') ?></span></p>
                                     <?php if ($validation->getError('img')) : ?>
                                         <span class="badge badge-danger mb-1"> <?= $errors = $validation->getError('img') ?></span>
                                     <?php endif ?>

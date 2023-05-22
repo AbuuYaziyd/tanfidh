@@ -27,7 +27,7 @@
                                     <span class="badge badge-warning badge-pill mr-2"><?= lang('app.mushrif') ?></span>
                                     <span class="danger blink"><?= $umrah['mulahadha']??'' ?></span>
                                 <?php elseif ($umrah['tnfdhStatus'] == 0) : ?>
-                                    <span class="badge badge-secondary badge-pill mr-2"><?= lang('app.admin') ?></span>
+                                    <span class="badge badge-secondary badge-pill mr-2"><?= lang('app.underAction') ?></span>
                                 <?php elseif ($umrah['tnfdhName'] != null && $umrah['makkahLat'] == null) : ?>
                                     <span type="button" class="btn btn-success round mr-2"><?= lang('app.active') ?></span>
                                 <?php elseif ($umrah['makkahLat'] != null) : ?>

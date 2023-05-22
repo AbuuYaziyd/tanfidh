@@ -108,7 +108,7 @@ class TanfidhController extends BaseController
         // $mushrif = $nt.' - '. $jm;
         // $upl = 'tasrih';
         // $next = $user['tnfdhDate'];
-        // dd($user);
+        dd($user);
 
         $validationRule = $this->validate(
             [

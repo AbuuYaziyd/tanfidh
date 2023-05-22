@@ -41,7 +41,7 @@ class MushrifController extends BaseController
         $data['all'] = $dt->where(['userId' => session('id')])->findAll();
         $data['umra'] = $tanfidh->where('userId', session('id'))->first();
         $data['month'] = $dt->where(['month(created_at)' => date('m'), 'userId' => session('id')])->findAll();
-        // dd($data);
+        dd($data);
 
         if (session('role') == 'mushrif') {
             return view('mushrif/index', $data);
@@ -257,22 +257,17 @@ class MushrifController extends BaseController
                 ->join('countries c', 'c.country_code=users.nationality')
                 ->join('universities u', 'u.uni_id=users.jamia')
                 ->find(session('id'));
-        $mushrif = $mr['id'];
-        $data['tasrih'] = $tanfidh->where(['tanfidh.mushrif' => $mushrif, 'tnfdhStatus' => null])
+        $data['tasrih'] = $tanfidh->where(['tnfdhStatus' => null])
                             ->join('users u', 'u.id=tanfidh.userId')
                             ->findAll();
         $data['title'] = lang('app.tasrih');
-        // dd($data);
+        dd($data);
         
-        if (session('role') == 'mushrif') {
             if (!$data['tasrih']) {
                 return redirect()->to('user');
             } else {
                 return view('mushrif/tasrih', $data);
-            }
-        } else {
-            return redirect()->to('user')->with('type', 'error')->with('text', lang('app.authorisedPersonellOnly'))->with('title', lang('app.sorry'));
-        }   
+            } 
     }
     
     public function tasrihUser($id)
@@ -290,11 +285,7 @@ class MushrifController extends BaseController
         $data['title'] = lang('app.tasrih');
         // dd($data);
         
-            if (!$data['user']) {
-                return redirect()->to('user');
-            } else {
                 return view('mushrif/userTasrih', $data);
-            } 
     }
 
     public function mulahadha($id)
