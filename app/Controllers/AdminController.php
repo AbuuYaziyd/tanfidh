@@ -28,28 +28,16 @@ class AdminController extends BaseController
         $role = $user->find(session('id'));
 
         $data['mushrif'] = $user->where('role', 'mushrif')->countAllResults();
-        // $data['makka'] = $tanfidh->where(['makkahLat' => null,'miqatLat!=' => null])->countAllResults();
-        // $data['tanfidh'] = $tanfidh->where(['miqatLat' => null])->countAllResults();
         $data['judud'] = $user->where(['malaf' => null, 'status' => 0])->countAllResults();
         $data['set'] = $set->where(['info' => 'tasrihDate', 'extra>=' => date('Y-m-d')])->first();
         $data['full'] = count($user->findAll());
-        // $data['jamia'] = count($user->groupBy('jamia')->where('jamia!=', null)->findAll());
-        // $data['nationality'] = count($user->groupBy('nationality')->where('nationality!=', null)->findAll());
         $data['title'] = lang('app.dashboard');
         $data['tasrihNow'] = $tanfidh->where(['tasrih!=' => null, 'tnfdhStatus' => null])->countAllResults();
         $data['tasrih'] = $tanfidh->where('tnfdhStatus', null)->countAllResults();
         $data['tasrihAll'] = $tanfidh->where('tnfdhStatus', 0)->countAllResults();
         
-        // $data['lead'] = $tanfidh->where('mushrif', session('id'))->countAllResults();
         $data['status'] = $tanfidh->where(['tnfdhStatus' => 'done','mushrif', session('id')])->countAllResults();
-        // $data['judud0'] = $user->where(['malaf' => null, 'status' => null, 'jamia' => $role['jamia'], 'nationality' => $role['nationality']])->countAllResults();
-        // $data['judud1'] = $user->where(['malaf' => null, 'status' => 0, 'jamia' => $role['jamia'], 'nationality' => $role['nationality']])->countAllResults();
         $data['set'] = $set->where(['info' => 'tasrihDate', 'extra>=' => date('Y-m-d')])->first();
-        // $data['total'] = $user->where(['nationality' => $role['nationality'], 'jamia' => $role['jamia'],'role!=' => 'admin'])->countAllResults();
-        // $data['full'] = $user->where('role!=', 'admin')->countAllResults();
-        // $data['tasrihNow'] = $tanfidh->where(['tasrih!=' => null, 'mushrif' => session('id'), 'tnfdhStatus!=' => null])->countAllResults();
-        // $data['tasrihAll'] = $tanfidh->where(['tasrih!=' => null, 'mushrif' => session('id')])->countAllResults();
-        // $data['title'] = lang('app.dashboard');
         $data['all'] = $dt->where(['userId' => session('id')])->findAll();
         $data['umra'] = $tanfidh->where('userId', session('id'))->first();
         $data['month'] = $dt->where(['month(created_at)' => date('m'), 'userId' => session('id')])->findAll();
