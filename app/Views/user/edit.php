@@ -19,7 +19,6 @@
                 <div class="col-12 col-sm-5 px-0 d-flex justify-content-end align-items-center px-1 mb-2">
                 </div>
             </div>
-            <?php if ($user['mushrif'] != null) : ?>
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
@@ -99,43 +98,6 @@
                     </div>
                 </div>
             </div>
-            <?php else : ?>
-            <div class="card">
-                <div class="card-content">
-                    <div class="card-body">
-                        <div class="row bg-primary bg-lighten-5 rounded mb-2 mx-25 text-center text-lg-left">
-                            <div class="col-12 col-sm-4 p-2">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <?= form_open('user/edit-mushrif/' . $user['id']) ?>
-                            <div class="row">
-                                <div class="col-md-6 mb-1">
-                                    <label><b><?= lang('app.nationality') ?>:</b></label>
-                                    <fieldset>
-                                        <select name="nationality" class="custom-select">
-                                            <?php foreach ($nat as $key => $data) : ?>
-                                                <option value="<?= $data['country_code'] ?>" 
-                                                <?= $user['nationality'] == $data['country_code']?'selected':'' ?>><?= $data['country_arName'] ?></option>
-                                            <?php endforeach ?>
-                                        </select>
-                                    </fieldset>
-                                </div>
-                                <div class="col-md-6 mb-1">
-                                    <label><b><?= lang('app.jamia') ?>:</b></label>
-                                    <fieldset>
-                                        <input type="text" class="form-control" name="jamia" value="<?= $user['uni_name'] ?>" readonly>
-                                        <input type="hidden" class="form-control" name="jamia" value="<?= $user['uni_id'] ?>" readonly>
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-lg btn-block btn-secondary mt-2"><?= lang('app.edit') ?></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php endif ?>
         </section>
     </div>
 <?= $this->endSection() ?>

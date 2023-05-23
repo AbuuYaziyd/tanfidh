@@ -41,7 +41,6 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <?php if ($user['mushrif'] != null) : ?>
                             <table class="table table-borderless">
                                 <tbody>
                                     <tr>
@@ -82,8 +81,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <?php endif ?>
-                            <a href="<?= base_url('user/edit/' . $user['id']) ?>" class="btn btn-lg btn-block btn-<?= $user['mushrif'] != null?'primary':'danger' ?> mt-2"><?= lang('app.edit') ?></a>
+                            <a href="<?= base_url('user/edit/' . $user['id']) ?>" class="btn btn-lg btn-block btn-primary mt-2"><?= lang('app.edit') ?></a>
                         </div>
                     </div>
                 </div>
