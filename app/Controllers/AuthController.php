@@ -191,10 +191,10 @@ class AuthController extends BaseController
                 $session->set($sessData);
                 return redirect()->to('user');
             }else {
-                return redirect()->to('login')->with('password', lang('app.wrongPassword'));
+                return redirect()->to('login')->with('error', lang('app.wrongPassword'));
             }
         }else {
-            return redirect()->to('login')->with('iqama', lang('app.notSigned'));
+            return redirect()->to('login')->with('error', lang('app.notSigned'));
         }
     }
 

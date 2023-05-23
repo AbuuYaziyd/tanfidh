@@ -93,10 +93,10 @@
                 });
             <?php elseif (session()->getFlashdata('error')) : ?>
                 Swal.fire({
-                    title: "<?= lang('app.sorry') ?>",
-                    text: "<?= session()->getFlashdata('error') ?>",
+                    title: "<?= session()->getFlashdata('error') ?>",
                     type: "error",
-                    showConfirmButton: false,
+                    showConfirmButton: true,
+                    confirmButtonText: 'تمام',
                 });
             <?php endif ?>
         });

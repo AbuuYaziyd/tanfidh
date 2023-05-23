@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <div class="text-center"><?= lang('app.newUser') ?><a href="<?= base_url('register') ?>"><?= lang('app.signup') ?></a></div>
+                        <div class="text-center"><?= lang('app.rememberedmypass') ?><a href="<?= base_url('login') ?>"> <?= lang('app.login') ?></a></div>
                     </div>
                 </div>
             </div>

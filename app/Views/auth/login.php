@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <p class="float-xl-left text-center m-0"><a href="<?= base_url('recover') ?>" class="card-link"><?= lang('app.recoverpassword') ?></a></p>
+                        <p class="text-center"><a href="<?= base_url('recover') ?>" class="card-link"><?= lang('app.recoverpassword') ?></a></p>
                     </div>
                 </div>
             </div>
