@@ -285,7 +285,7 @@ class MushrifController extends BaseController
         $data['title'] = lang('app.tasrih');
         // dd($data);
         
-                return view('mushrif/userTasrih', $data);
+        return view('mushrif/userTasrih', $data);
     }
 
     public function mulahadha($id)

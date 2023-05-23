@@ -178,7 +178,7 @@ class AuthController extends BaseController
                     'malaf' =>sprintf('%04s', ($data['malaf'])),
                     'bitaqa' => $data['bitaqa'],
                     'role' => $data['role'],
-                    'mushrif' => $data['mushrif'],
+                    'mushrif' => $user->where('role', 'admin')->first()['id'],
                     'isLoggedIn' => TRUE
                 ];
                 $session->set($sessData);
