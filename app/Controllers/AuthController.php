@@ -167,7 +167,7 @@ class AuthController extends BaseController
         $session = session();
         $user = new User();
 
-        // dd($this->request->getVar());
+        dd($this->request->getVar());
         $bitaqa = $this->request->getVar('bitaqa');
         $password = $this->request->getVar('password');
         $data = $user->where('bitaqa =', $bitaqa)->first();
