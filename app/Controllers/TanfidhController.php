@@ -29,7 +29,7 @@ class TanfidhController extends BaseController
         $data['green'] = $umrah->where(['userId' => session('id'), 'tnfdhStatus' => 'completed'])->first();
         // dd($data);
 
-        if ($data['umrah'] == null) {
+        if ($data['umrah'] != null) {
             return view('umrah/index', $data);
         } else {
             return redirect()->to('user')->with('type', 'info')->with('title', lang('app.regNotOk'));
