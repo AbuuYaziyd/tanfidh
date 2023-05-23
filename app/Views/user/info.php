@@ -13,7 +13,7 @@ $user = $usr->find(session('id'));
             <div class="card">
                 <div class="card-body">
                     <h3>
-                        <span class="btn btn-primary btn-lg round box-shadow-2"><b><?= $umra['tnfdhName'] ?></b></span>
+                        <span class="btn btn-primary btn-lg round box-shadow-2"><?= $umra['tnfdhName'] ?></span>
                         <span class="btn btn-lg btn-<?= $umra['tnfdhSabab']=='dead'?'danger':'warning' ?> box-shadow-2 round pull-left"><?= lang('app.'.$umra['tnfdhSabab']) ?></span>
                     </h3>
                 </div>
