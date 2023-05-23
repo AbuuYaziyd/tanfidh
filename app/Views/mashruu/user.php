@@ -75,6 +75,15 @@
                             </div>
                             <div class="card-body">
                                 <?= form_open('tanfidh/edit/'.$user['tnfdhId']) ?>
+                                <?php if ($user['malaf']==null) : ?>
+                                <label><b><?= lang('app.malaf') ?></b></label>
+                                <fieldset class="form-group position-relative has-icon-left mb-1">
+                                    <input type="text" class="form-control" name="malaf" placeholder="<?= lang('app.malaf') ?>">
+                                    <div class="form-control-position">
+                                        <i class="la la-credit-card"></i>
+                                    </div>
+                                </fieldset>
+                                <?php endif ?>
                                 <label><b>السبب</b></label>
                                 <fieldset>
                                     <select name="sabab" class="custom-select mb-2">
@@ -83,7 +92,7 @@
                                         <option value="sick"><?= lang('app.sick') ?></option>
                                     </select>
                                 </fieldset>
-                                    <label><b><?= lang('app.name') ?></b></label>
+                                <label><b><?= lang('app.name') ?></b></label>
                                 <fieldset class="form-group position-relative has-icon-left mb-1">
                                     <input type="text" class="form-control" name="ism" placeholder="<?= lang('app.name') ?>">
                                     <div class="form-control-position">
