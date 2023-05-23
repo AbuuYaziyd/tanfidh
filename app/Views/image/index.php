@@ -26,7 +26,7 @@
                                     <a class="btn btn-outline-secondary box-shadow-2 round pull-left" href="<?= base_url('image/edit/' . session('id')).'/iqama' ?>"><?= lang('app.edit') ?></a>
                                 </h4>
                                 </div>
-                                <img class="img-fluid" src="<?= base_url('app-assets/images/' . ($img['imgIqama'] == null ? 'demo/iqama.jpg' : 'malaf/'.(session('malaf')=='----'?'new':session('malaf')).'/') . $img['imgIqama']) ?>" alt="img">
+                                <img class="img-fluid" src="<?= base_url('app-assets/images/' . ($img['imgIqama'] == null ? 'demo/iqama.jpg' : 'malaf/'.(session('malaf')==0000?'new':session('malaf')).'/') . $img['imgIqama']) ?>" alt="img">
                             </div>
                             <div style="text-align: center;" class="my-1">
                                 <span><b><?= $user['iqama'] ?></b></span>
@@ -41,7 +41,7 @@
                                     <a class="btn btn-outline-secondary box-shadow-2 round pull-left" href="<?= base_url('image/edit/' . session('id')).'/bitaqa' ?>"><?= lang('app.edit') ?></a>
                                 </h4>
                                 </div>
-                                <img class="img-fluid" src="<?= base_url('app-assets/images/' . ($img['imgStu'] == null ? 'demo/stu.jpg' : 'malaf/'.(session('malaf')=='----'?'new':session('malaf')).'/') . $img['imgStu']) ?>" alt="img">
+                                <img class="img-fluid" src="<?= base_url('app-assets/images/' . ($img['imgStu'] == null ? 'demo/stu.jpg' : 'malaf/'.(session('malaf')==0000?'new':session('malaf')).'/') . $img['imgStu']) ?>" alt="img">
                             </div>
                             <div style="text-align: center;" class="my-1">
                                 <span><b><?= $user['bitaqa'] ?></b></span>
@@ -56,7 +56,7 @@
                                     <a class="btn btn-outline-secondary box-shadow-2 round pull-left" href="<?= base_url('image/edit/' . session('id')).'/iban' ?>"><?= lang('app.edit') ?></a>
                                 </h4>
                                 </div>
-                                <img class="img-fluid" src="<?= base_url('app-assets/images/' . ($img['imgIban'] == null ? 'demo/iban.png' : 'malaf/'.(session('malaf')=='----'?'new':session('malaf')).'/') . $img['imgIban']) ?>" alt="img">
+                                <img class="img-fluid" src="<?= base_url('app-assets/images/' . ($img['imgIban'] == null ? 'demo/iban.png' : 'malaf/'.(session('malaf')==0000?'new':session('malaf')).'/') . $img['imgIban']) ?>" alt="img">
                             </div>
                             <div style="text-align: center;" class="my-1">
                                 <span><b><?= $user['iban'] ?></b></span>

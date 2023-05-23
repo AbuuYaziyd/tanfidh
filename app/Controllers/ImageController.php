@@ -74,7 +74,7 @@ class ImageController extends BaseController
         $nm = $settingz->find($id)['malaf'];
         $upl = $this->request->getVar('select');
 
-        // dd($upl);
+        // dd($nm??'ok');
         $validationRule = $this->validate(
             [
                 'img' => 'uploaded[img]|mime_in[img,image/jpg,image/jpeg,image/png]|max_size[img,2048]',
@@ -134,6 +134,7 @@ class ImageController extends BaseController
 
                 $ppn = [$upl => $name,];
 
+                // dd($name);
                 $img->move('app-assets/images/malaf/'.($nm??'new').'/', $name);
                 $image->update($pic['imgId'], $ppn);
 
