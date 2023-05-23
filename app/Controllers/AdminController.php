@@ -34,7 +34,7 @@ class AdminController extends BaseController
         $data['title'] = lang('app.dashboard');
         $data['tasrihNow'] = $tanfidh->where(['tasrih!=' => null, 'tnfdhStatus' => null])->countAllResults();
         $data['tasrih'] = $tanfidh->where('tnfdhStatus', null)->countAllResults();
-        $data['tasrihAll'] = $tanfidh->where('tnfdhStatus', 0)->countAllResults();
+        $data['tasrihAll'] = $tanfidh->where('tnfdhStatus>=', 0)->countAllResults();
         
         $data['status'] = $tanfidh->where(['tnfdhStatus' => 'done','mushrif', session('id')])->countAllResults();
         $data['set'] = $set->where(['info' => 'tasrihDate', 'extra>=' => date('Y-m-d')])->first();
