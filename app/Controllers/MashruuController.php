@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Bank;
 use App\Models\Data;
+use App\Models\Image;
 use App\Models\Mashruu;
 use App\Models\Notify;
 use App\Models\Setting;
@@ -309,13 +310,52 @@ class MashruuController extends BaseController
         // dd($this->request->getVar());
 
         $tan = new Tanfidh();
+        $usr = new User();
+        $img = new Image();
 
         $dt = [
           'tnfdhName' => $this->request->getVar('ism'),  
           'tnfdhSabab' => $this->request->getVar('sabab'), 
           'tnfdhStatus' => 1, 
         ];
-        // dd($dt);
+
+        $malaf = $this->request->getVar('malaf');
+        if ($malaf) {
+            $mlf = ['malaf' => $malaf];
+            $user_id = $tan->find($id)['userId'];
+            // dd($mlf);
+
+            $usr->update($user_id, $mlf);
+
+            $image = $img->where('userId', $user_id)->first();
+
+            // Iqama
+
+            $to = "app-assets/images/malaf/".$malaf."/";
+            // dd($to);
+
+            if (!file_exists($to)) {mkdir($to, 0777, true);}
+
+            $iqama = "app-assets/images/malaf/new/".$image['imgIqama'];
+            if (file_exists($iqama)) {
+                $file = new \CodeIgniter\Files\File($iqama);
+                $file->move($to, $image['imgIqama']);
+            }
+            
+            $bitaqa = "app-assets/images/malaf/new/".$image['imgStu'];
+            if (file_exists($bitaqa)) {
+                $file = new \CodeIgniter\Files\File($bitaqa);
+                $file->move($to, $image['imgStu']);
+            }
+            
+            $iban = "app-assets/images/malaf/new/".$image['imgIban'];
+            if (file_exists($iban)) {
+                $file = new \CodeIgniter\Files\File($iban);
+                $file->move($to);
+            }
+            
+            // dd($file);
+        }
 
         $ok = $tan->update($id, $dt);
 
