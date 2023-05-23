@@ -19,7 +19,7 @@
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-content">
-                                    <img class="card-img-top img-fluid px-1 mt-1" src="<?= base_url('app-assets/images/malaf/'.$user['malaf']??'new'.'/'.$user['imgIqama']) ?>" alt="img">
+                                    <img class="card-img-top img-fluid px-1 mt-1" src="<?= base_url('app-assets/images/malaf/'.$user['malaf']==0000?'new':$user['malaf'].'/'.$user['imgIqama']) ?>" alt="img">
                                     <div class="card-body" style="text-align: center;">
                                         <h3><b><?= lang('app.iqama') ?></b></h3>
                                         <h3 class="btn btn-black round mb-1"><?= $user['iqama'] ?></h3>
@@ -32,7 +32,7 @@
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-content">
-                                    <img class="card-img-top img-fluid px-1 mt-1" src="<?= base_url('app-assets/images/malaf/'.$user['malaf'].'/'.$user['imgStu']) ?>" alt="img">
+                                    <img class="card-img-top img-fluid px-1 mt-1" src="<?= base_url('app-assets/images/malaf/'.$user['malaf']==0000?'new':$user['malaf'].'/'.$user['imgStu']) ?>" alt="img">
                                     <div class="card-body" style="text-align: center;">
                                         <h3><b><?= lang('app.bitaqa') ?></b></h3>
                                         <h3 class="btn btn-black round mb-1"><?= $user['bitaqa'] ?></h3>
@@ -45,7 +45,7 @@
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-content">
-                                    <img class="card-img-top img-fluid px-1 mt-1" src="<?= base_url('app-assets/images/malaf/'.$user['malaf'].'/'.$user['imgIban']) ?>" alt="img">
+                                    <img class="card-img-top img-fluid px-1 mt-1" src="<?= base_url('app-assets/images/malaf/'.$user['malaf']==0000?'new':$user['malaf'].'/'.$user['imgIban']) ?>" alt="img">
                                     <div class="card-body" style="text-align: center;">
                                         <h3><b><?= lang('app.iban') ?></b></h3>
                                         <button class="btn btn-black round mb-1" onclick="myFunction()">
