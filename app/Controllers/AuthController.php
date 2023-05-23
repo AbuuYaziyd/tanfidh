@@ -189,7 +189,7 @@ class AuthController extends BaseController
                     'isLoggedIn' => TRUE
                 ];
                 $session->set($sessData);
-                return redirect()->to('/user');
+                return redirect()->to('user');
             }else {
                 return redirect()->to('login')->with('password', lang('app.wrongPassword'));
             }
