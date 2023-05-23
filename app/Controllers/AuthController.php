@@ -47,7 +47,7 @@ class AuthController extends BaseController
 
     public function secure()
     {
-        dd($this->request->getVar());
+        // dd($this->request->getVar());
         helper('form');
         
         $nat = new Country();
@@ -63,8 +63,6 @@ class AuthController extends BaseController
                 'iqama' => 'required|exact_length[10]|integer|is_unique[users.iqama]',
                 'bitaqa' => 'required',
                 'phone' => 'required|exact_length[9]|integer',
-                'nationality' => 'required',
-                'jamia' => 'required|integer',
                 'bank' => 'required|integer',
                 'level' => 'required',
             ],
@@ -97,25 +95,19 @@ class AuthController extends BaseController
                     'required' => lang('error.required'),
                     'integer' => lang('error.integer'),
                 ],
-                'jamia' => [
-                    'required' => lang('error.required'),
-                    'integer' => lang('error.integer'),
-                ],
                 'level' => [
-                    'required' => lang('error.required'),
-                ],
-                'nationality' => [
                     'required' => lang('error.required'),
                 ],
             ]
         );
+        // dd($input);
         
         if (!$input) {
 
             $data['nat'] = $nat->findAll();
             $data['bank'] = $bank->findAll();
             $data['uni'] = $uni->findAll();
-            $data['validation'] = $this->validator->getErrors();
+            $data['errors'] = $this->validator->getErrors();
 
             $set = $set->where('name', 'count')->first();
             if ($user->countAllResults() >= intval($set['value'])) {
@@ -124,8 +116,9 @@ class AuthController extends BaseController
                 $data['reg'] = null;
             }
             $data['title'] = lang('app.register');
+            // dd($data);
 
-            return redirect()->back()->withInput()->with('data', $data);
+            return view('auth/register', $data);
         } else {
             $data = [
                 'name' => $this->request->getVar('name'),
@@ -134,8 +127,8 @@ class AuthController extends BaseController
                 'iqama' => $this->request->getVar('iqama'),
                 'bitaqa' => $this->request->getVar('bitaqa'),
                 'phone' => $this->request->getVar('phone'),
-                'nationality' => $this->request->getVar('nationality'),
-                'jamia' => $this->request->getVar('jamia'),
+                'nationality' => 'TZ',
+                'jamia' => 2,
                 'level' => $this->request->getVar('level'),
                 'bank' => $this->request->getVar('bank'),
             ];

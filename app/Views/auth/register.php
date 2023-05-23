@@ -24,11 +24,6 @@
                             <label class="text-bold-600"><?= lang('app.nationality') ?></label>
                             <fieldset class="form-group position-relative has-icon-left mb-1">
                                 <input type="text" class="form-control" value="تنزانيا" readonly>
-                                <!-- <select class="select2 form-control" name="" id="nat">
-                                    <?php foreach ($nat as $key => $data) : ?>
-                                        <option value="<?= $data['country_code'] ?>" <?= $data['country_code']=='TZ'?'selected':'' ?> redonly><?= $data['country_arName'] ?></option>
-                                    <?php endforeach ?>
-                                </select> -->
                                 <div class="form-control-position">
                                     <i class="la la-flag"></i>
                                 </div>
@@ -40,15 +35,15 @@
                                     <i class="la la-university"></i>
                                 </div>
                             </fieldset>
-                            <label class="text-bold-600"><?= lang('app.iqama').' '.$validation->getError('iqama') ?><?= $errors = $validation->getError('iqama') ?></label>
+                            <label class="text-bold-600"><?= lang('app.iqama') ?></label>
+                            <?php if ($validation->getError('iqama')) : ?>
+                                <span class="badge badge-danger"> <?= $errors = $validation->getError('iqama') ?></span>
+                            <?php endif ?>
                             <fieldset class="form-group position-relative has-icon-left mb-1">
                                 <input type="text" class="form-control" name="iqama" placeholder="<?= lang('app.iqama') ?>" value="<?= old('iqama') ?>">
                                 <div class="form-control-position">
                                     <i class="la la-credit-card"></i>
                                 </div>
-                                <?php if ($validation->getError('iqama')) : ?>
-                                    <span class="badge badge-danger"> <?= $errors = $validation->getError('iqama') ?></span>
-                                <?php endif ?>
                             </fieldset>
                             <label class="text-bold-600"><?= lang('app.namereg') . ' - (' . lang('app.arabic') .')' ?></label>
                             <?php if ($validation->getError('name')) : ?>
@@ -126,13 +121,6 @@
                                 <div class="form-control-position">
                                     <i class="la la-area-chart"></i>
                                 </div>
-                            </fieldset>
-                            <fieldset class="form-group position-relative my-2">
-                                <input type="checkbox" name="check" class="chk-remember">
-                                <label><?= lang('app.accept') . lang('app.terms & services') ?></label>
-                                <?php if ($validation->getError('check')) : ?>
-                                    <span class="badge badge-danger"> <?= $errors = $validation->getError('check') ?></span>
-                                <?php endif ?>
                             </fieldset>
                             <button type="submit" class="btn btn-info btn-lg btn-block"><?= lang('app.send') ?></button>
                             </form>
