@@ -83,6 +83,7 @@ class UserController extends BaseController
             $data['mushrif'] = $user->find($data['user']['mushrif']);
         } else {
             $data['user'] = $user->join('banks', 'banks.bankId=users.bank')
+                                ->join('universities u', 'u.uni_id=users.jamia')
                                 ->join('countries n', 'n.country_code=users.nationality')
                                 ->find($id);
         }
@@ -91,11 +92,11 @@ class UserController extends BaseController
         $data['uni'] = $uni->findAll();
         // dd($data);
 
-        if (session('role') != 'admin') {
+        // if (session('role') != 'admin') {
             return view('user/profile', $data);
-        } else {
-            return view('admin/profile', $data);
-        } 
+        // } else {
+        //     return view('admin/profile', $data);
+        // } 
     }
 
     public function edit($id)
