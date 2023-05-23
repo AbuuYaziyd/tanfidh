@@ -26,17 +26,13 @@
                                         <h5><b><?= lang('app.iban') ?>: <?= $user['iban'] ?></b></h5>
                                     </fieldset>
                                 <?php endif ?>
-                            <img class="img-fluid mb-2" id="show_image" src="<?= base_url('app-assets/images/' . ($img[$type] == null ? 'demo/no-image.png' : 'malaf/'.(session('malaf')=='----'?'new':session('malaf')).'/') . $img[$type]) ?>" alt="img">
-                                    <p><span class="badge badge-danger bdage-pill"><?= lang('app.imgErr') ?></span></p>
-                                    <?php if ($validation->getError('img')) : ?>
-                                        <span class="badge badge-danger mb-1"> <?= $errors = $validation->getError('img') ?></span>
-                                    <?php endif ?>
-                                <div class="input-group mt-0">
-                                    <div class="custom-file">
-                                        <input type="file" name="img" id="image" class="custom-file-input" id="inputGroupFile02">
-                                        <label class="custom-file-label"><?= lang('app.chooseFile') ?></label>
-                                    </div>
-                                </div>
+                                <?php if ($validation->getError('img')) : ?>
+                                    <p><span class="badge badge-danger mb-1"> <?= $errors = $validation->getError('img') ?></span></p>
+                                <?php endif ?>
+                                <input type="file" name="img" id="image" style="display: none;">
+                                <label for="image">
+                                    <img class="img-fluid mb-2" id="show_image" src="<?= base_url('app-assets/images/' . ($img[$type] == null ? 'demo/no-image.png' : 'malaf/'.(session('malaf')=='----'?'new':session('malaf')).'/') . $img[$type]) ?>" alt="img">
+                                </label>
                             </div>
                         </div>
                         <input type="hidden" name="select" value="<?= $type ?>">

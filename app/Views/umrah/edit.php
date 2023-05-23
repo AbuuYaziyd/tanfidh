@@ -13,12 +13,10 @@
                     <div class="card-content">
                         <div class="card-body">
                             <h4 class="card-title"><?= lang('app.register') . ' ' . lang('app.to') . ' ' . lang('app.tanfidh') . '  ' . lang('app.umrah') ?><span class="text-muted font-medium-1"> @</span><span class="users-view-username text-muted font-medium-1 "><?= sprintf('%04s',session('malaf')) ?></span></h4>
-                            <span class="bagde badge-danger badge-pill mb-2"><?= lang('app.imgErr') ?></span>
+                            <?php if ($validation->getError('img')) : ?>
+                            <p><span class="badge badge-danger"> <?= $errors = $validation->getError('img') ?></span></p>
+                            <?php endif ?>
                             <div class="row mt-1">
-                                <!-- <input type="file" name="pic1" id="pic1" style="display:none;"/>
-                                <label for="pic1">
-                                    <img src="dist/img/picfilename.png">
-                                </label> -->
                                 <div class="col-12 mb-1">
                                     <input type="file" name="img" id="image" style="display: none;">
                                     <label for="image">
@@ -35,9 +33,6 @@
                                             <span class="badge badge-danger"> <?= $errors = $validation->getError('select') ?></span>
                                         <?php endif ?>
                                     </fieldset>
-                                    <?php if ($validation->getError('img')) : ?>
-                                        <span class="badge badge-danger"> <?= $errors = $validation->getError('img') ?></span>
-                                    <?php endif ?>
                                     <button type="submit" class="btn btn-lg btn-block btn-secondary mt-2" <?= (date('d/m/Y') != date('d/m/Y') ? 'disabled' : '') ?>><i class="ft ft-check-circle white"></i> <?= lang('app.upload') ?></button>
                                 </div>
                             </div>
