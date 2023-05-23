@@ -7,6 +7,81 @@ $usr = new User();
 
 $user = $usr->find(session('id'));
 ?>
+<div class="col-12">
+    <?php if ($umra != null && $umra['tnfdhStatus'] ==1) : ?>
+        <div class="card">
+            <div class="card-body">
+                <h3>
+                    <span class="btn btn-primary btn-lg round box-shadow-2"><b><?= $umra['tnfdhName'] ?></b></span>
+                    <span class="btn btn-lg btn-<?= $umra['tnfdhSabab']=='dead'?'danger':'warning' ?> box-shadow-2 round pull-left"><?= lang('app.'.$umra['tnfdhSabab']) ?></span>
+                </h3>
+            </div>
+        </div>
+    <?php  else : ?>
+    <div class="card">
+        <div class="card-header">
+            <h3>
+                <b>
+                    <?= $title ?>
+                    <?php if ($umrah) : ?>
+                        <?php if ($umrah['tasrih'] == null) : ?>
+                            <span class="badge badge-danger badge-pill mr-2"><?= lang('app.tasrih') ?></span>
+                        <?php elseif ($umrah['tnfdhStatus'] == null) : ?>
+                            <span class="badge badge-warning badge-pill mr-2"><?= lang('app.mushrif') ?></span>
+                            <span class="danger blink"><?= $umrah['mulahadha']??'' ?></span>
+                        <?php elseif ($umrah['tnfdhStatus'] == 0) : ?>
+                            <span class="badge badge-secondary badge-pill mr-2"><?= lang('app.underAction') ?></span>
+                        <?php elseif ($umrah['tnfdhName'] != null && $umrah['makkahLat'] == null) : ?>
+                            <span type="button" class="btn btn-success round mr-2"><?= lang('app.active') ?></span>
+                        <?php elseif ($umrah['makkahLat'] != null) : ?>
+                            <span type="button" class="btn btn-amber round mr-2"><?= lang('app.ok') ?></span>
+                        <?php endif ?>
+                    <?php endif ?>
+                </b>
+            </h3>
+        </div>
+        <div class="card-content">
+            <div id="new-orders" class="media-list position-relative">
+                <div class="row m-2">
+                    <div class="col-12">
+                        <?php if ($next >= date('Y-m-d')) : ?>
+                            <?php if (!$umrah) : ?>
+                                <div class="heading-elements p-1">
+                                    <?= form_open('umrah/create') ?>
+                                        <input type="hidden" name="id" value="<?= session('id') ?>">
+                                        <input type="date" name="tanfidh" class="form-control"
+                                        min="<?= (date('Y-m-d', strtotime($next[0]['value']))>=date('Y-m-d')?date('Y-m-d', strtotime($next[0]['value'])):date('Y-m-d')) ?>" 
+                                        max="<?= date('Y-m-d', strtotime(end($next)['value'])) ?>">
+                                        <button type="submit" class="btn btn-icon btn-info round my-2 btn-block btn-lg"><?= lang('app.register') ?></button>
+                                    </form>
+                                </div>
+                            <?php elseif ($umrah['makkahLat'] == null) : ?>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="heading-elements">
+                                            <a href="<?= base_url('umrah/show/'. $umrah['tnfdhId']) ?>" class="btn btn-icon btn-success round mb-2 btn-block btn-lg <?= (($umrah['tnfdhStatus'] != null)?'disabled':'') ?>"><?= lang('app.tasrih') ?></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php else : ?>
+                                <div class="heading-elements">
+                                    <button class="btn btn-icon btn-info round mb-2 btn-block btn-lg" disabled><?= lang('app.done') ?> <?= lang('app.tanfidh') ?> <?= lang('app.umrah') ?></button>
+                                </div>
+                            <?php endif ?>
+                        <?php  else :?>
+                            <div class="heading-elements">
+                                <button type="button" class="btn btn-icon btn-secondary mb-2 btn-block round btn-lg" disabled>
+                                    <?= lang('app.near') ?>
+                                </button>
+                            </div>
+                        <?php endif ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php  endif ?>
+</div>
 <div class="col-md-4">
     <div class="card crypto-card-3 pull-up">
         <div class="card-content">
@@ -71,7 +146,78 @@ $user = $usr->find(session('id'));
         </div>
     </div>
 </div>
-<?php if (!$set || $user['umrah']!=null) : ?>
+<?php if (isset($umra)) : ?>
+    <div class="col-md-4 col-12">
+        <a href="<?= base_url('umrah') ?>">
+            <div class="card crypto-card-3 pull-up">
+                <div class="card-content">
+                    <div class="card-body pb-0">
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="ft ft-cloud-drizzle info font-large-2" title="XRP"></i>
+                            </div>
+                            <div class="col-6 pl-2">
+                                <h4><?= lang('app.tanfidh') . ' ' . lang('app.next') ?></h4>
+                                <h6 class="text-muted"><?= lang('app.baarik') ?></h6>
+                            </div>
+                            <div class="col-4 text-right">
+                                <?php if ($umra['tasrih']==null) : ?>
+                                    <h4 class="btn btn-danger round blink"><b><?= lang('app.tasrih') ?></b></h4>
+                                <?php elseif ($umra['tnfdhStatus']==null) : ?>
+                                    <h4 class="btn btn-warning round blink"><b><?= lang('app.mushrif') ?></b></h4>
+                                <?php elseif ($umra['tnfdhStatus']==0) : ?>
+                                    <h4 class="btn btn-success round blink"><b><?= lang('app.underAction') ?></b></h4>
+                                <?php else : ?>
+                                    <h4 class="btn btn-amber round typewriter"><b><?= lang('app.tanfidh') ?><br> <?= lang('app.umrah') ?></b></h4>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand">
+                                    <div class=""></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink">
+                                    <div class=""></div>
+                                </div>
+                            </div><canvas id="xrp-chartjs" class="height-75 chartjs-render-monitor" width="1138" height="150" style="display: block; width: 569px; height: 75px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+<?php elseif ($set || $user['umrah']==null) : ?>
+    <div class="col-md-4 col-12">
+        <a href="<?= base_url('umrah') ?>">
+            <div class="card crypto-card-3 pull-up">
+                <div class="card-content">
+                    <div class="card-body pb-0">
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="ft ft-cloud-drizzle success font-large-2" title="XRP"></i>
+                            </div>
+                            <div class="col-7">
+                                <h4><?= lang('app.tanfidh') . ' ' . lang('app.next') ?></h4>
+                                <h6 class="text-muted"><?= lang('app.baarik') ?></h6>
+                            </div>
+                            <div class="col-3 text-right">
+                                <h4 class="btn btn-purple round blink"><b><?= lang('app.register') ?></b></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 height-75" style="text-align: center;">
+                            <span class="mt-3 btn btn-info btn-pill"><?= lang('app.tasrihDate') ?> - <?= date('d/m/Y', strtotime($set['extra'])) ?></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+<?php else : ?>
     <div class="col-md-4 col-12">
         <div class="card crypto-card-3 pull-up">
             <div class="card-content">
@@ -108,111 +254,6 @@ $user = $usr->find(session('id'));
             </div>
         </div>
     </div>
-<?php elseif (isset($umra)) : ?>
-    <div class="col-md-4 col-12">
-        <?php $att = ['id'=>'umraForm'] ?>
-        <?= form_open('umrah', $att) ?>
-            <a id="submit">
-                <div class="card crypto-card-3 pull-up">
-                    <div class="card-content">
-                        <div class="card-body pb-0">
-                            <div class="row">
-                                <div class="col-2">
-                                    <i class="ft ft-cloud-drizzle info font-large-2" title="XRP"></i>
-                                </div>
-                                <div class="col-5 pl-2">
-                                    <h4><?= lang('app.tanfidh') . ' ' . lang('app.next') ?></h4>
-                                    <h6 class="text-muted"><?= lang('app.baarik') ?></h6>
-                                </div>
-                                <div class="col-5 text-right">
-                                    <?php if ($umra['tasrih']==null) : ?>
-                                        <h4 class="btn btn-danger round blink"><b><?= lang('app.tasrih') ?></b></h4>
-                                    <?php elseif ($umra['tnfdhStatus']==null) : ?>
-                                        <h4 class="btn btn-warning round blink"><b><?= lang('app.mushrif') ?></b></h4>
-                                    <?php elseif ($umra['tnfdhStatus']==0) : ?>
-                                        <h4 class="btn btn-success round blink"><b><?= lang('app.underAction') ?></b></h4>
-                                    <?php elseif ($umra['tnfdhDate']>date('Y/m/d')): ?>
-                                        <h4 class="btn btn-success round typewriter"><b><?= lang('app.registered') ?></b></h4>
-                                    <?php else : ?>
-                                        <?php if ($umra['miqatLat']==null) : ?>
-                                            <h4 class="btn btn-info round blink"><b><?= lang('app.miqat') ?></b></h4>
-                                        <?php elseif ($umra['makkahLat']==null) : ?>
-                                            <h4 class="btn btn-purple round blink"><b><?= lang('app.makkah') ?></b></h4>
-                                        <?php else : ?>
-                                            <h4 class="btn btn-amber round typewriter"><b><?= lang('app.done') ?> <?= lang('app.tanfidh') ?><br> <?= lang('app.umrah') ?></b></h4>
-                                        <?php endif ?>
-                                    <?php endif ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="chartjs-size-monitor">
-                                    <div class="chartjs-size-monitor-expand">
-                                        <div class=""></div>
-                                    </div>
-                                    <div class="chartjs-size-monitor-shrink">
-                                        <div class=""></div>
-                                    </div>
-                                </div><canvas id="xrp-chartjs" class="height-75 chartjs-render-monitor" width="1138" height="150" style="display: block; width: 569px; height: 75px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </form>
-    </div>
-    <?= $this->section('scripts') ?>
-    <script>
-        window.onload = function() {
-            document.getElementById('submit').onclick = function() {
-                document.getElementById('umraForm').submit();
-                return false;
-            };
-        };
-    </script>
-    <?= $this->endsection() ?>
-<?php else : ?>
-        <div class="col-md-4 col-12">
-            <?php $att = ['id'=>'umraForm'] ?>
-                <?= form_open('umrah', $att) ?>
-                <a id="submit">
-                    <div class="card crypto-card-3 pull-up">
-                        <div class="card-content">
-                            <div class="card-body pb-0">
-                                <div class="row">
-                                    <div class="col-2">
-                                        <i class="ft ft-cloud-drizzle success font-large-2" title="XRP"></i>
-                                    </div>
-                                    <div class="col-7">
-                                        <h4><?= lang('app.tanfidh') . ' ' . lang('app.next') ?></h4>
-                                        <h6 class="text-muted"><?= lang('app.baarik') ?></h6>
-                                    </div>
-                                    <div class="col-3 text-right">
-                                        <h4 class="success blink"><b><?= lang('app.register') ?></b></h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 height-75" style="text-align: center;">
-                                    <span class="mt-3 btn btn-info btn-pill"><?= lang('app.tasrihDate') ?> - <?= date('d/m/Y', strtotime($set['extra'])) ?></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </form>
-        </div>
-        <?= $this->section('scripts') ?>
-        <script>
-            window.onload = function() {
-                document.getElementById('submit').onclick = function() {
-                    document.getElementById('umraForm').submit();
-                    return false;
-                };
-            };
-        </script>
-        <?= $this->endsection() ?>
 <?php endif ?>
 
 <?php if (session('role') != 'user') : ?>

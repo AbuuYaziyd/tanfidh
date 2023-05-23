@@ -44,7 +44,7 @@
                                             <td>تنزانيا</td>
                                             <td>الجامعة الإسلامية</td>
                                             <td><?= $dt['ism'] ?></td>
-                                            <td><?= lang('app.'.$dt['sabab']) ?></td>
+                                            <td><span class="badge badge-pill badge-<?= $dt['sabab']=='dead'?'danger':'warning' ?>"><?= lang('app.'.$dt['sabab']) ?></span></td>
                                             <td><?= date('d/m/Y', strtotime($dt['date'])) ?></td>
                                             <td><?= $dt['bank'] ?></td>
                                             <td><?= $dt['code'] ?></td>

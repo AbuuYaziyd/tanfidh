@@ -322,7 +322,7 @@ class AuthController extends BaseController
                 session()->destroy();
                 return redirect()->to('login')->with('type', 'success')->with('title', lang('app.ok'))->with('text', lang('app.passchanged'));
             } else {
-                return redirect()->to('password/change')->with('toast', 'danger')->with('message', lang('app.errorOccured'));
+                return redirect()->to('password/change')->with('title', 'danger')->with('text', lang('app.errorOccured'));
             }
         }
     }

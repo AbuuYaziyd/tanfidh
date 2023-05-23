@@ -144,7 +144,6 @@ $routes->group('mushrif', function ($routes) {
  */
 $routes->group('umrah', function ($routes) {
     $routes->get('/', 'TanfidhController::index', ['filter' => 'auth']);
-    $routes->post('/', 'TanfidhController::index', ['filter' => 'auth']);
     $routes->post('create', 'TanfidhController::create', ['filter' => 'auth']);
     $routes->get('show/(:num)', 'TanfidhController::show/$1', ['filter' => 'auth']);
     $routes->get('edit/(:num)', 'TanfidhController::edit/$1', ['filter' => 'auth']);

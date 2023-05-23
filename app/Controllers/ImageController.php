@@ -125,7 +125,7 @@ class ImageController extends BaseController
                 $image->update($pic['imgId'], $ppn);
 
                 // dd($test);
-                return redirect()->to('image')->with('toast', 'success')->with('message', lang('app.imageEdited'))->with('title', lang('app.success'));
+                return redirect()->to('image')->with('type', 'success')->with('type', lang('app.imageEdited'))->with('title', lang('app.success'));
             } else {
                 // dd($this->request->getVar());
                 $img = $this->request->getFile('img');

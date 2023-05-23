@@ -6,7 +6,6 @@ use App\Controllers\BaseController;
 use App\Models\Bank;
 use App\Models\Country;
 use App\Models\Data;
-use App\Models\Hits;
 use App\Models\Image;
 use App\Models\Setting;
 use App\Models\Tanfidh;
@@ -53,11 +52,7 @@ class UserController extends BaseController
                     // dd($image);
                     return redirect()->to('image');
                 } else {
-                    if ($role['role'] != 'admin') {
-                        return redirect()->to('admin');
-                    } else {
-                        return view('user/index', $data);
-                    }
+                    return view('user/index', $data);
                 }
             }
         } else {

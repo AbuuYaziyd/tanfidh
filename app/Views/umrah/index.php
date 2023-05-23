@@ -3,18 +3,6 @@
 <?= $this->section('content') ?>
 
         <div class="content-body">
-            <?php if ($umrah != null) : ?>
-                <?php if ($umrah['tnfdhStatus'] == 'sent') : ?>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>
-                                <?= lang('app.name') ?> <?= lang('app.ism') ?>: <b><?= $umrah['tnfdhName'] ?></b>
-                                <span class="btn btn-success box-shadow-2 round pull-left"><?= lang('app.sabab') ?>: <?= $umrah['tnfdhSabab'] ?></span>
-                            </h3>
-                        </div>
-                    </div>
-                <?php  endif ?>
-            <?php  endif ?>
             <div class="card">
                 <div class="card-header">
                     <h3>
@@ -93,7 +81,8 @@
                     'ّّ<i class="la la-arrow-circle-left"></i>رفع التصريح<br> ' +
                     'ّّ<i class="la la-arrow-circle-left"></i>عمليات المشرف والمدير<br> ' +
                     'ّّ<i class="la la-arrow-circle-left"></i>ارسال الموقع عند وصال الميقات/الحل<br> ' +
-                    'ّّ<i class="la la-arrow-circle-left"></i>ارسال الموقع عند اتمام العمرة<br> ',
+                    'ّّ<i class="la la-arrow-circle-left"></i>ارسال الموقع عند الطواف<br> ' +
+                    'ّّ<i class="la la-arrow-circle-left"></i>ارسال الموقع عند اتمام العمرة/السعي<br> ',
                 focusConfirm: true,
                 showCloseButton: false,
                 confirmButtonText: '<?= lang('app.ok') ?>',
