@@ -103,7 +103,13 @@ $file = date('dmY', strtotime($set->where('info', 'tasrihDate')->first()['extra'
                                         <?php foreach ($ready as $key => $data) : ?>
                                             <tr>
                                                 <td><?= $key + 1 ?></td>
-                                                <td><a href="<?= base_url('tanfidh/show/' . $data['tnfdhId']) ?>" class="badge badge-pill badge-info"><?= sprintf('%04s', $data['malaf']) ?></a></td>
+                                                <td>
+                                                    <?php if ($data['tnfdhStatus']!=1) : ?>
+                                                        <a href="<?= base_url('tanfidh/show/' . $data['tnfdhId']) ?>" class="badge badge-pill badge-info"><?= sprintf('%04s', $data['malaf']) ?></a>
+                                                    <?php else : ?>
+                                                        <a href="<?= base_url('mushrif/user/' . $data['userId']) ?>" class="badge badge-pill badge-info"><?= sprintf('%04s', $data['malaf']) ?></a>
+                                                    <?php endif ?>
+                                                </td>
                                                 <td><?= $data['name'] ?></td>
                                                 <td><?= $data['iqama'] ?></td>
                                                 <td><a href="tel:+966<?= $data['phone'] ?>" class="badge badge-secondary">966<?= $data['phone'] ?></a></td>

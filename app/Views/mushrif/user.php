@@ -33,30 +33,16 @@
                                         <th><?= lang('app.date') ?></th>
                                         <th><?= lang('app.donefor') ?></th>
                                         <th><?= lang('app.status') ?></th>
-                                        <th><?= lang('app.miqat') ?></th>
-                                        <th><?= lang('app.makkah') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($mashruu as $key => $dt) : ?>
                                     <tr>
-                                        <td><b><?= $dt['date'] ?></b></td>
+                                        <td><b><?= date('d-m-Y', strtotime($dt['date']??$dt['tnfdhDate'])) ?></b></td>
                                         <td>
-                                            <?= $dt['ism'] ?> - <span class="badge badge-info badge-pill"><?= $dt['sabab'] ?></span>
+                                            <?= $dt['ism']??$dt['tnfdhName'] ?> - <span class="badge badge-info badge-pill"><?= lang('app.'.($dt['sabab']??$dt['tnfdhSabab'])) ?></span>
                                         </td>
-                                        <td>
-                                            <?php if ($dt['status'] == 0) : ?>
-                                            <button type="button" class="btn btn-sm btn-danger round"><?= lang('app.notdone') ?></button>
-                                            <?php elseif ($dt['status'] == 1) : ?>
-                                            <button type="button" class="btn btn-sm btn-success round"><?= lang('app.done') ?></button>
-                                            <?php endif ?>
-                                        </td>                                       
-                                        <td>
-                                            <a href="https://www.latlong.net/c/?lat=<?= $dt['miqatLat'] ?>&long=<?= $dt['miqatLong'] ?>" target="_blank" class="btn btn-sm round btn-primary"><?= lang('app.miqat') ?></a>
-                                        </td>
-                                        <td>
-                                            <a href="https://www.latlong.net/c/?lat=<?= $dt['makkahLat'] ?>&long=<?= $dt['makkahLong'] ?>" target="_blank" class="btn btn-sm round btn-warning"><?= lang('app.makkah') ?></a>
-                                        </td>
+                                        <td><button type="button" class="btn btn-sm btn-success round"><?= lang('app.done') ?></button></td>
                                     </tr>
                                     <?php endforeach ?>
                                 </tbody>
@@ -75,7 +61,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title"><?= lang('app.imgIqama') ?></h4>
                                 </div>
-                                <img class="img-fluid" src="<?= base_url('app-assets/images/' . ($img['imgIqama'] == null ? 'demo/iqama.jpg' : 'malaf/'.($user['malaf']=='----'?'new':$user['malaf']).'/') . $img['imgIqama']) ?>" alt="img">
+                                <img class="img-fluid" src="<?= base_url('app-assets/images/' . ($img['imgIqama'] == null ? 'demo/iqama.jpg' : 'malaf/'.($user['malaf']==0000?'new':$user['malaf']).'/') . $img['imgIqama']) ?>" alt="img">
                             </div>
                             <div style="text-align: center;" class="my-1">
                                 <span><b><?= $user['iqama'] ?></b></span>

@@ -38,7 +38,10 @@
                                     <?php foreach ($month as $key => $dt) : ?>
                                         <tr>
                                             <td><?= $key+1 ?></td>
-                                            <td><span class="badge badge-pill badge-<?= ( $dt['name']==$dt['mushrif']?'success':'info') ?>"><?= sprintf('%04s', $dt['malaf']) ?></span></td>
+                                            <td>
+                                                <a href="<?= base_url('mushrif/user/' . $dt['userId']) ?>" class="badge badge-pill badge-<?= ( $dt['name']==$dt['mushrif']?'secondary':'info') ?>"><?= sprintf('%04s', $dt['malaf']) ?></a>
+                                                <!-- <span class="badge badge-pill badge-<?= ( $dt['name']==$dt['mushrif']?'success':'info') ?>"><?= sprintf('%04s', $dt['malaf']) ?></span> -->
+                                            </td>
                                             <td><?= $dt['name'] ?></td>
                                             <td><?= $dt['iqama'] ?></td>
                                             <td><a href="tel:+966<?= $dt['phone'] ?>" class="badge badge-secondary">966<?= $dt['phone'] ?></a></td>

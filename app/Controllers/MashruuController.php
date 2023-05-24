@@ -295,10 +295,10 @@ class MashruuController extends BaseController
 
         $tanfidh = new Tanfidh();
 
-        $data['user'] = $tanfidh->where(['tnfdhStatus' => 0, 'tnfdhId' => $id])
+        $data['user'] = $tanfidh->where(['tnfdhStatus' => 0])
                             ->join('users u', 'u.id=tanfidh.userId')
                             ->join('images', 'u.id=images.userId')
-                            ->first();
+                            ->find($id);
         $data['title'] = lang('app.tasrih');
         // dd($data);
         
@@ -317,7 +317,9 @@ class MashruuController extends BaseController
           'tnfdhName' => $this->request->getVar('ism'),  
           'tnfdhSabab' => $this->request->getVar('sabab'), 
           'tnfdhStatus' => 1, 
+          'malaf' => $this->request->getVar('malaf')??$tan->find($id)['malaf'],
         ];
+        // dd($dt);
 
         $malaf = $this->request->getVar('malaf');
         if ($malaf) {

@@ -181,23 +181,31 @@ class MushrifController extends BaseController
     
     public function user($id)
     {
-        $user = new User();
+        $usr = new User();
         $image = new Image();
-        $mash = new Mashruu();
+        $mash = new Tanfidh();
+        $dt = new Data();
+
         
-        $data['user'] = $user->join('countries c', 'c.country_code=users.nationality')
+        $user = $usr->join('countries c', 'c.country_code=users.nationality')
                             ->join('universities u', 'u.uni_id=users.jamia')
                             ->find($id);
-        $data['mashruu'] = $mash->where('userId', $id)->findAll();
+
+        $mashruu = $mash->where('userId', $id)->findAll();
+        $d = $dt->where('iqama', $user['iqama'])->findAll();
+
+        if ($mashruu) {
+            $data['mashruu'] = $mashruu;
+        } else {
+            $data['mashruu'] = $d;
+        }
+
+        $data['user'] = $user;
         $data['img'] = $image->where('userId', $id)->first();
         $data['title'] = lang('app.jadid');
         // dd($data);
 
-        if (session('role') == 'mushrif') {
-            return view('mushrif/user', $data);
-        } else {
-            return redirect()->to('user')->with('type', 'error')->with('text', lang('app.authorisedPersonellOnly'))->with('title', lang('app.sorry'));
-        }   
+        return view('mushrif/user', $data);
     }
 
     public function active($id)

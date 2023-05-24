@@ -153,17 +153,11 @@ class AdminController extends BaseController
         $data['user'] = $user->join('countries c', 'c.country_code=users.nationality')
                         ->join('universities u', 'u.uni_id=users.jamia')
                         ->find($id);
-        $m = $data['user']['mushrif'];
-        if ($m!=null) {
-            $data['mushrif'] = $user->find($m);
-        } else {
-            $data['mushrif'] = null;
-        }
         
         $data['img'] = $image->where('userId', $id)->first();
         $data['mashruu'] = $mash->where('userId', $id)->findAll();
         $data['title'] = lang('app.user');
-        // dd($data);
+        dd($data);
 
         return view('admin/user', $data);
     }
